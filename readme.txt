@@ -162,7 +162,8 @@ signal()
 	The signal function in C is used to associate a specific signal (like SIGINT for interrupt or SIGTERM for termination)
 	with a custom handler function. This handler is executed when the process receives the signal.
 	The function takes two arguments: the signal number (signum) and a pointer to the handler function,
-	which must follow the prototype void handler(int).
+	which must follow the prototype:
+		void handler(int).
 	Alternatively, you can use SIG_IGN to ignore the signal or SIG_DFL to restore its default behavior.
 	If the program enters other functions or threads,
 	the signal handler remains valid unless overridden by another signal() or sigaction() call.
