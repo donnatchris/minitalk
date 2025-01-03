@@ -6,7 +6,7 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 19:15:19 by christophed       #+#    #+#             */
-/*   Updated: 2025/01/03 19:35:32 by christophed      ###   ########.fr       */
+/*   Updated: 2025/01/03 20:06:12 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,4 @@ int	get_pid(char *str)
 		error("Invalid PID, the process does not exist.");
 	
 	return (pid);
-}
-
-// Function to write a message prefixed by "CLIENT:" in green color
-// and followed by a newline character
-void	say(char *str)
-{
-	ft_printf(GREEN "CLIENT: " RESET "%s\n", str);
 }

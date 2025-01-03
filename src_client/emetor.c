@@ -6,7 +6,7 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 18:06:13 by christophed       #+#    #+#             */
-/*   Updated: 2025/01/03 19:57:15 by christophed      ###   ########.fr       */
+/*   Updated: 2025/01/03 20:07:03 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	send_ascii(int server_pid, char *str)
 				kill(server_pid, SIGUSR2);
 			else
 				kill(server_pid, SIGUSR1);
-			say("Signal sent");
 			usleep(100);
 			j++;
 		}
@@ -48,7 +47,6 @@ void	end_transmission(int server_pid)
 	while (i < 8)
 	{
 		kill(server_pid, SIGUSR1);
-		say("Signal sent");
 		usleep(100);
 		i++;
 	}
