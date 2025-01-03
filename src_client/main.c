@@ -6,7 +6,7 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 15:47:32 by christophed       #+#    #+#             */
-/*   Updated: 2025/01/03 19:17:46 by christophed      ###   ########.fr       */
+/*   Updated: 2025/01/03 19:58:50 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,6 @@ int	main(int ac, char **av)
 		error("Invalid input, 2 arguments are required (one PID and a string).");
 	server_pid = get_pid(av[1]);
 	send_ascii(server_pid, av[2]);
+	end_transmission(server_pid);
 	return (0);
 }

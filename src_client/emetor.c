@@ -6,7 +6,7 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 18:06:13 by christophed       #+#    #+#             */
-/*   Updated: 2025/01/03 19:37:08 by christophed      ###   ########.fr       */
+/*   Updated: 2025/01/03 19:57:15 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,21 @@ void	send_ascii(int server_pid, char *str)
 			usleep(100);
 			j++;
 		}
+		i++;
+	}
+}
+
+// Function to end the transmission by sending 8 SIGUSR1 signals
+void	end_transmission(int server_pid)
+{
+	int	i;
+
+	i = 0;
+	while (i < 8)
+	{
+		kill(server_pid, SIGUSR1);
+		say("Signal sent");
+		usleep(100);
 		i++;
 	}
 }

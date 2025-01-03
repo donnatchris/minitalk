@@ -6,7 +6,7 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 15:46:37 by christophed       #+#    #+#             */
-/*   Updated: 2025/01/03 19:00:22 by christophed      ###   ########.fr       */
+/*   Updated: 2025/01/03 19:59:07 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ void	error(char *str);
 int		is_number(char *str);
 void	say(char *str);
 void	send_ascii(int server_pid, char *str);
+void	end_transmission(int server_pid);
 
 #endif

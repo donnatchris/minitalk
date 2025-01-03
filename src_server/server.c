@@ -6,7 +6,7 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 19:20:21 by christophed       #+#    #+#             */
-/*   Updated: 2025/01/03 19:29:57 by christophed      ###   ########.fr       */
+/*   Updated: 2025/01/03 19:53:13 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,17 @@ void	receive_ascii(int signum)
 	i++;
 	if (i == 8)
 	{
-		if (c == 0)
-			exit(0);
-		ft_printf("%c", c);
+		if (c)
+			ft_printf("%c", c);
+		else
+			end_transmission();
 		i = 0;
 		c = 0;
 	}
 }
 
-// Function 
+// Function to annunce the end of transmission
+void	end_transmission(void)
+{
+	ft_printf("\n");
+}

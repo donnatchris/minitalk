@@ -33,5 +33,6 @@ void	error(char *str);
 void	say(char *str);
 void	confirm(int signum);
 void	receive_ascii(int signum);
+void	end_transmission(void);
 
 #endif
