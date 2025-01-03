@@ -1,41 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.c                                           :+:      :+:    :+:   */
+/*   receiver.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 19:20:21 by christophed       #+#    #+#             */
-/*   Updated: 2025/01/03 19:53:13 by christophed      ###   ########.fr       */
+/*   Updated: 2025/01/03 21:02:38 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/server.h"
 
-// Function to write a massage prefixed by "SERVER:" in blue color
-// and followed by a newline character
-void	say(char *str)
-{
-	ft_printf(BLUE "SERVER: " RESET "%s\n", str);
-}
+// Function to store the received signals in a char
+// void	receive_ascii(int signum)
 
-// Function to handle a signal
-void	handler(int signum)
-{
-	if (signum == SIGUSR1)
-		say("Signal received: SIGUSR1");
-	else if (signum == SIGUSR2)
-		say("Signal received: SIGUSR2");
-}
-
-// Function to confirm the reception of a signal
-void	confirm(int signum)
-{
-	if (signum == SIGUSR1)
-		say("Signal confirmed: SIGUSR1");
-	else if (signum == SIGUSR2)
-		say("Signal confirmed: SIGUSR2");
-}
 
 // Function to handle the reception of a signal
 void	receive_ascii(int signum)
@@ -57,7 +36,7 @@ void	receive_ascii(int signum)
 	}
 }
 
-// Function to annunce the end of transmission
+// Function to end the transmission while receiving 8 SIGUSR1 signals
 void	end_transmission(void)
 {
 	ft_printf("\n");

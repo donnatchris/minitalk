@@ -20,9 +20,8 @@
 # include "../libft/includes/libft.h"
 
 // Functions
-void	error(char *str);
-void	confirm(int signum);
 void	receive_ascii(int signum);
-void	end_transmission(void);
+
+
 
 #endif
