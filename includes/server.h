@@ -19,15 +19,28 @@
 # include <signal.h>
 # include "../libft/includes/libft.h"
 
+// Structures
+typedef struct s_msg
+{
+	char		*str;
+	int			len;
+	int			transmitter;
+}				t_msg;
+
 // Variables
-extern char	*message;
+extern t_msg	*message;
 
 // Functions
 void	initialize_reception(int signum);
 void	calculate_len(char c);
 void	start_reception(int signum);
 void	end_reception(void);
-void	allocate_memory(int len);
+void	allocate_memory();
 void	store_message(char c);
+void	error(char *str);
+void	initialize_message(void);
+void	initialize_program(void);
+void	allocate_structure_memory(void);
+
 
 #endif

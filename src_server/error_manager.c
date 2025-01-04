@@ -6,7 +6,7 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 21:50:53 by christophed       #+#    #+#             */
-/*   Updated: 2025/01/04 10:08:49 by christophed      ###   ########.fr       */
+/*   Updated: 2025/01/04 12:19:02 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 // Function to display an error message and exit the program
 void	error(char *str)
 {
+	ft_printf("error\n");
 	ft_printf("ERROR: %s\n", str);
 	exit(0);
 }
