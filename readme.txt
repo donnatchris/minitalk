@@ -19,20 +19,25 @@ The list of possible bonus features includes:
 - Communication between your programs must be performed exclusively using UNIX signals.
 
 ARCHITECTURE:
-- src/ directory for main src files
-- utils/ directory for secondary files
-- bonus/ directory for the bonus files
+- src_client/ directory for client src files
+- src_server/ directory for server rsc files
 - includes/ directory for header files
-- test/ directory fot tests files
 - Makefile (with rules: make bonus clean fclean re):
-	replace NAME OF BINARY by the name of your mandatory project
-	replace NAME OF BONUS by the name of your bonus
 - libft/ directory with my own library (standard functions, ft_printf, get_next_line)
-- readme.txt for quick explanation and main commands of the project
+- readme.txt for explanations and main commands of the project
 
 SOME COMMANDS YOU CAN USE:
-
-
+make
+	compiles both server and client with bonus (there is no specific rule to compile bonus)
+	server and client then must be launched from different terminal windows 
+./server
+	launches the server, which remains waiting until CTRL + C to stop it
+	the server must be launched before the client
+	when the client sends a message to the server, the server writes the message sent
+	and sends a confirmation to the client
+./client <server PID> "<Your message>"
+	the client send <Your message> to the server which has the <server PID> PID
+	and then wait for a response from the server
 
 DOCUMENTATION:
 
@@ -82,6 +87,25 @@ process stop
 		If the parent doesn't handle the termination of the child,
 		the operating system may assign a new parent process (often init or systemd) to clean up.
 
+process state
+	In general, a process on a UNIX or Linux system can be in one of the following states:
+	Running (R):
+		The process is currently running or ready to run.
+		It is using the CPU or waiting for its turn to use the CPU.
+	Sleeping (S):
+		The process is waiting for an event or a resource.
+		It can be in an interruptible sleep, where it can be awakened by a signal or an event,
+		or in an uninterruptible sleep, where it cannot be interrupted.
+	Stopped (T): 
+		The process has been stopped, usually by a signal such as SIGSTOP or SIGTSTP.
+		It can be restarted by a signal such as SIGCONT.
+	Zombie (Z):
+		The process has finished execution, but its entry in the process table has not yet been removed.
+		This occurs when the parent process has not yet read the exit status of the child process.
+	Dead (D):
+		The process is in an uninterruptible sleep state, usually waiting for an I/O operation.
+		This state is rarely observed and is often related to hardware issues or device lockups.
+
 signal
 	A signal in computing is a mechanism used to notify a process about an event or interrupt its execution.
 	It is a form of inter-process communication in UNIX-like systems.
@@ -91,7 +115,8 @@ signal
 	Processes can handle signals by either performing a default action or executing a custom signal handler.
 
 common signals
-	Here’s a list of common signals in UNIX-like systems, along with their associated numbers:
+	Here’s a list of common signals in UNIX-like systems, along with their associated numbers.
+	In the context of the minitalk project, the only signal allowed are SIGUSR1 and SIGUSR2
 	SIGINT: Interrupt signal, associated with number 2.
 		It interrupts a running process. It is typically sent when a user presses Ctrl+C in the terminal.
 	SIGKILL: Force termination signal, associated with number 9.
