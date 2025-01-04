@@ -37,7 +37,7 @@ void	start_reception(int signum);
 void	end_reception(void);
 void	allocate_memory();
 void	store_message(char c);
-void	error(char *str);
+void	receiver_error(char *str);
 void	initialize_container(void);
 void	initialize_receiver(void);
 void	allocate_container_memory(void);

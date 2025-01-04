@@ -6,11 +6,27 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 19:20:21 by christophed       #+#    #+#             */
-/*   Updated: 2025/01/04 13:11:34 by christophed      ###   ########.fr       */
+/*   Updated: 2025/01/04 13:48:53 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/server.h"
+
+// Function to initialize program
+void	initialize_receiver(void)
+{
+	ft_printf("initialize_program\n");
+	initialize_container();
+	signal(SIGUSR1, initialize_reception);
+	signal(SIGUSR2, initialize_reception);
+}
+
+// Function to display an error message and reinitialize the receiver
+void	receiver_error(char *str)
+{
+	ft_printf("RECEPTION ERROR: %s\n", str);
+	initialize_receiver();
+}
 
 // Function to initialize the reception of a signal
 void	initialize_reception(int signum)
@@ -45,7 +61,7 @@ void	calculate_len(char c)
 		i = 0;
 		len = ft_atoi(str);
 		if (len == 0 || len > 999999)
-			error("message len must be between 1 and 999999 caracters");
+			receiver_error("message len must be between 1 and 999999 caracters");
 		container->len = len;
 		i = 0;
 		allocate_memory();
@@ -73,27 +89,6 @@ void	start_reception(int signum)
 	}
 }
 
-// Function to allocate memory for the string and initialize it
-void	allocate_memory(void)
-{
-	ft_printf("allocate memory, len = %d\n", container->len);
-	int		i;
-
-	if (container->msg)
-		free(container->msg);
-	container->msg = NULL;
-	container->msg = (char *) malloc(sizeof(char) * (container->len + 1));
-	if	(!container->msg)
-		error("allocation memory failed");
-	i = 0;
-	while (i < container->len)
-	{
-		container->msg[i] = '0';
-		i++;
-	}
-	container->msg[container->len] = '\0';
-}
-
 // Function to store the received signals in a string
 void	store_message(char c)
 {
@@ -104,7 +99,7 @@ void	store_message(char c)
 	{
 		i = 0;
 		if (c != '\0')
-			error("message is too long according to the len transmitted");
+			receiver_error("message is too long according to the len transmitted");
 		end_reception();
 	}
 	else
@@ -120,7 +115,7 @@ void	end_reception(void)
 {
 	ft_printf("end_reception\n");
 	if (!container || !container->msg)
-		error("no message received");
+		receiver_error("no message received");
 	ft_printf("%s\n", container->msg);
 	initialize_receiver();
 }
