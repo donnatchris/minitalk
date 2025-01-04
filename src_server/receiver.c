@@ -6,7 +6,7 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 19:20:21 by christophed       #+#    #+#             */
-/*   Updated: 2025/01/04 18:33:08 by christophed      ###   ########.fr       */
+/*   Updated: 2025/01/04 18:53:31 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ void	end_reception(void)
 		free(client_pid);
 		receiver_error("allocation memory for message failed");
 	}
+	usleep(100);
 	if (!is_number(client_pid) || kill(ft_atoi(client_pid), SIGUSR1) == -1)
 	{
 		free(msg);

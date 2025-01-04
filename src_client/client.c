@@ -6,7 +6,7 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 15:49:48 by christophed       #+#    #+#             */
-/*   Updated: 2025/01/04 18:00:15 by christophed      ###   ########.fr       */
+/*   Updated: 2025/01/04 18:59:04 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,11 @@ int	check_pid(char *str)
 	if (kill(pid, 0) == -1)
 		error("Invalid PID, the process does not exist.");
 	return (pid);
+}
+
+// Function confirm that the server has answered
+void	confirmation(int signum)
+{
+	ft_printf("Message sent. ");
+	ft_printf("The server has confirmed by sending signal %d \n", signum);
 }

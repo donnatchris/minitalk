@@ -6,7 +6,7 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 18:00:36 by christophed       #+#    #+#             */
-/*   Updated: 2025/01/04 18:23:01 by christophed      ###   ########.fr       */
+/*   Updated: 2025/01/04 18:56:32 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,17 @@ typedef struct s_msg
 
 // Global variable
 extern t_msg	*container;
+
+// Color definitions
+#define RESET   "\x1b[0m"
+#define BLACK   "\x1b[30m"
+#define RED     "\x1b[31m"
+#define GREEN   "\x1b[32m"
+#define YELLOW  "\x1b[33m"
+#define BLUE    "\x1b[34m"
+#define MAGENTA "\x1b[35m"
+#define CYAN    "\x1b[36m"
+#define WHITE   "\x1b[37m"
 
 // Functions
 // server.c

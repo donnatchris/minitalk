@@ -6,7 +6,7 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 17:57:35 by christophed       #+#    #+#             */
-/*   Updated: 2025/01/04 17:59:59 by christophed      ###   ########.fr       */
+/*   Updated: 2025/01/04 18:49:51 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,13 @@
 
 // Functions
 // client.c
+// various functions
 void	error(char *str);
-int	is_number(char *str);
-int	check_pid(char *str);
+int		is_number(char *str);
+int		check_pid(char *str);
+void	confirmation(int signum);
 // transmitter.c
+// functions to send messages by using 2 signals
 void	send_message(int server_pid, char *str);
 void	send_char(int server_pid, char c);
 void	send_str(int server_pid, char *str);
