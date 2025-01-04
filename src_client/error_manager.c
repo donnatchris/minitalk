@@ -6,11 +6,11 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 15:49:48 by christophed       #+#    #+#             */
-/*   Updated: 2025/01/03 21:00:03 by christophed      ###   ########.fr       */
+/*   Updated: 2025/01/04 14:43:52 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/client.h"
+#include "../includes/minitalk.h"
 
 // Function to display an error message and exit the program
 void	error(char *str)

@@ -6,11 +6,11 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 13:39:18 by christophed       #+#    #+#             */
-/*   Updated: 2025/01/04 13:43:33 by christophed      ###   ########.fr       */
+/*   Updated: 2025/01/04 14:46:46 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/server.h"
+#include "../includes/minitalk.h"
 
 // Function to allocate memory for the t_msg variable
 void	allocate_container_memory(void)
@@ -45,9 +45,9 @@ void	initialize_container(void)
 }
 
 // Function to allocate memory for the string and initialize it
-void	allocate_memory(void)
+void	allocate_string_memory(void)
 {
-	ft_printf("allocate memory, len = %d\n", container->len);
+	ft_printf("allocate string memory, len = %d\n", container->len);
 	int		i;
 
 	if (container->msg)

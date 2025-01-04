@@ -6,11 +6,11 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 13:36:15 by christophed       #+#    #+#             */
-/*   Updated: 2025/01/04 13:47:07 by christophed      ###   ########.fr       */
+/*   Updated: 2025/01/04 14:44:43 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/server.h"
+#include "../includes/minitalk.h"
 
 // Function to check if a string is a number
 int	is_number(char *str)

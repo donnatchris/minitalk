@@ -6,22 +6,16 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 15:47:32 by christophed       #+#    #+#             */
-/*   Updated: 2025/01/04 13:13:09 by christophed      ###   ########.fr       */
+/*   Updated: 2025/01/04 14:43:58 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/client.h"
+#include "../includes/minitalk.h"
 
 int	main(int ac, char **av)
 {
-	int		server_pid;
-
 	if (ac != 3)
 		error("Invalid input, 2 arguments are required (one PID and a string).");
-	server_pid = get_pid(av[1]);
-	initialize_transmission(server_pid, av[2]);
-	usleep(100);
-	send_str(server_pid, av[2]);
-	// end_transmission(server_pid);
+	send_message(get_pid(av[1]), av[2]);
 	return (0);
 }

@@ -6,8 +6,8 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 21:50:53 by christophed       #+#    #+#             */
-/*   Updated: 2025/01/04 13:46:45 by christophed      ###   ########.fr       */
+/*   Updated: 2025/01/04 14:44:04 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/server.h"
+#include "../includes/minitalk.h"
