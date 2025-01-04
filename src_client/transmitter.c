@@ -6,7 +6,7 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 18:06:13 by christophed       #+#    #+#             */
-/*   Updated: 2025/01/03 21:13:14 by christophed      ###   ########.fr       */
+/*   Updated: 2025/01/04 10:15:00 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void	initialize_transmission(int server_pid, char *str)
 	int	len;
 
 	len = (int) ft_strlen(str);
+	ft_printf("len: %d\n", len);
 	if (len < 1)
 		error("The string is empty.");
 	if (len > 999999)

@@ -1,31 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   error_manager.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/03 15:23:34 by christophed       #+#    #+#             */
-/*   Updated: 2025/01/03 22:37:21 by christophed      ###   ########.fr       */
+/*   Created: 2025/01/03 21:50:53 by christophed       #+#    #+#             */
+/*   Updated: 2025/01/04 10:08:49 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/server.h"
 
-char	*message;
-
-int	main(void)
+// Function to display an error message and exit the program
+void	error(char *str)
 {
-	int		pid;
+	ft_printf("ERROR: %s\n", str);
+	exit(0);
+}
 
-	message = NULL;
-	pid = getpid();
-	ft_printf("SERVER PID: %d\n", pid);
-	signal(SIGUSR1, initialize_reception);
-	signal(SIGUSR2, initialize_reception);
-	while (1)
+// Function to check if a string is a number
+int	is_number(char *str)
+{
+	ft_printf("is_number\n");
+	int	i;
+
+	i = 0;
+	while (str[i] == 32 || (str[i] >= 9 && str[i] <= 13))
+		i++;
+	if (str[i] == '-' || str[i] == '+')
+		i++;
+	while (str[i])
 	{
-		;
+		if (!ft_isdigit(str[i]))
+			return (0);
+		i++;
 	}
-	return (0);
+	return (1);
 }

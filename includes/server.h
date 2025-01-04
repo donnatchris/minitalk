@@ -19,9 +19,15 @@
 # include <signal.h>
 # include "../libft/includes/libft.h"
 
+// Variables
+extern char	*message;
+
 // Functions
-void	receive_ascii(int signum);
-
-
+void	initialize_reception(int signum);
+void	calculate_len(char c);
+void	start_reception(int signum);
+void	end_reception(void);
+void	allocate_memory(int len);
+void	store_message(char c);
 
 #endif
