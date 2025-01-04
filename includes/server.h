@@ -22,13 +22,13 @@
 // Structures
 typedef struct s_msg
 {
-	char		*str;
+	char		*msg;
 	int			len;
 	int			transmitter;
 }				t_msg;
 
 // Variables
-extern t_msg	*message;
+extern t_msg	*container;
 
 // Functions
 void	initialize_reception(int signum);
@@ -38,9 +38,10 @@ void	end_reception(void);
 void	allocate_memory();
 void	store_message(char c);
 void	error(char *str);
-void	initialize_message(void);
-void	initialize_program(void);
-void	allocate_structure_memory(void);
+void	initialize_container(void);
+void	initialize_receiver(void);
+void	allocate_container_memory(void);
+void	close_program(int signum);
 
 
 #endif

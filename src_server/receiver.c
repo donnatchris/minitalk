@@ -6,15 +6,11 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 19:20:21 by christophed       #+#    #+#             */
-/*   Updated: 2025/01/04 12:31:57 by christophed      ###   ########.fr       */
+/*   Updated: 2025/01/04 13:11:34 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/server.h"
-
-// Function to store the received signals in a char
-// void	receive_ascii(int signum)
-
 
 // Function to initialize the reception of a signal
 void	initialize_reception(int signum)
@@ -50,7 +46,7 @@ void	calculate_len(char c)
 		len = ft_atoi(str);
 		if (len == 0 || len > 999999)
 			error("message len must be between 1 and 999999 caracters");
-		message->len = len;
+		container->len = len;
 		i = 0;
 		allocate_memory();
 		signal(SIGUSR1, start_reception);
@@ -80,22 +76,22 @@ void	start_reception(int signum)
 // Function to allocate memory for the string and initialize it
 void	allocate_memory(void)
 {
-	ft_printf("allocate memory, len = %d\n", message->len);
+	ft_printf("allocate memory, len = %d\n", container->len);
 	int		i;
 
-	if (message->str)
-		free(message->str);
-	message->str = NULL;
-	message->str = (char *) malloc(sizeof(char) * (message->len + 1));
-	if	(!message->str)
+	if (container->msg)
+		free(container->msg);
+	container->msg = NULL;
+	container->msg = (char *) malloc(sizeof(char) * (container->len + 1));
+	if	(!container->msg)
 		error("allocation memory failed");
 	i = 0;
-	while (i < message->len)
+	while (i < container->len)
 	{
-		message->str[i] = '0';
+		container->msg[i] = '0';
 		i++;
 	}
-	message->str[message->len] = '\0';
+	container->msg[container->len] = '\0';
 }
 
 // Function to store the received signals in a string
@@ -104,7 +100,7 @@ void	store_message(char c)
 	ft_printf("store_message, c vaut %c: \n", c);
 	static int	i = 0;
 
-	if (i == message->len)
+	if (i == container->len)
 	{
 		i = 0;
 		if (c != '\0')
@@ -113,9 +109,9 @@ void	store_message(char c)
 	}
 	else
 	{
-		message->str[i] = c;
+		container->msg[i] = c;
 		i++;
-		ft_printf("dans store message, message: %s\n", message->str);
+		ft_printf("dans store message, message: %s\n", container->msg);
 	}
 }
 
@@ -123,8 +119,8 @@ void	store_message(char c)
 void	end_reception(void)
 {
 	ft_printf("end_reception\n");
-	if (!message || !message->str)
+	if (!container || !container->msg)
 		error("no message received");
-	ft_printf("%s\n", message->str);
-	initialize_program();
+	ft_printf("%s\n", container->msg);
+	initialize_receiver();
 }
