@@ -6,7 +6,7 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 18:06:13 by christophed       #+#    #+#             */
-/*   Updated: 2025/01/04 18:08:41 by christophed      ###   ########.fr       */
+/*   Updated: 2025/01/04 18:38:10 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	send_char(int server_pid, char c)
 			kill(server_pid, SIGUSR2);
 		else
 			kill(server_pid, SIGUSR1);
-		usleep(150);
+		usleep(100);
 		i++;
 	}
 }

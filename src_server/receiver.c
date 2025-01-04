@@ -6,7 +6,7 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 19:20:21 by christophed       #+#    #+#             */
-/*   Updated: 2025/01/04 18:13:42 by christophed      ###   ########.fr       */
+/*   Updated: 2025/01/04 18:33:08 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	receiver_error(char *str)
 // by initializing the container and the signals
 void	initialize_receiver(void)
 {
-	ft_printf("initialize_receiver\n");
 	initialize_container();
 	signal(SIGUSR1, receive_msg);
 	signal(SIGUSR2, receive_msg);
@@ -33,17 +32,15 @@ void	initialize_receiver(void)
 // and send each complete caracter to the store_msg function
 void	receive_msg(int signum)
 {
-	ft_printf("receive_msg\n");
 	static char	c = 0;
 	static int	i = 0;
 
-	// if (container->receive_initializer == 0)
-	// {
-	// 	ft_printf("if receive_initializer\n");
-	// 	c = 0;
-	// 	i = 0;
-	// 	container->receive_initializer = 1;
-	// }
+	if (container->receive_initializer == 0)
+	{
+		c = 0;
+		i = 0;
+		container->receive_initializer = 1;
+	}
 	if (signum == SIGUSR2)
 		c |= 1 << i;
 	i++;
@@ -59,7 +56,6 @@ void	receive_msg(int signum)
 // until a '\0' character is received
 void	store_msg(char c)
 {
-	ft_printf("store_msg\n");
 	static int	i = 0;
 
 	if (container->store_initializer == 0)
@@ -80,7 +76,6 @@ void	store_msg(char c)
 // and reinitialize the receiver
 void	end_reception(void)
 {
-	ft_printf("end_reception\n");
 	int		len;
 	char	*client_pid;
 	char	*msg;
