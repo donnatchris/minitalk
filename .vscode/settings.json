@@ -1,6 +1,8 @@
 {
 	"files.associations": {
 		"sstream": "c",
-		"minitalk.h": "c"
+		"minitalk.h": "c",
+		"client.h": "c",
+		"server.h": "c"
 	}
 }

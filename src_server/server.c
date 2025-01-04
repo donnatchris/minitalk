@@ -1,23 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_manager.c                                    :+:      :+:    :+:   */
+/*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/03 15:49:48 by christophed       #+#    #+#             */
-/*   Updated: 2025/01/04 14:43:52 by christophed      ###   ########.fr       */
+/*   Created: 2025/01/04 13:36:15 by christophed       #+#    #+#             */
+/*   Updated: 2025/01/04 18:26:42 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minitalk.h"
-
-// Function to display an error message and exit the program
-void	error(char *str)
-{
-	ft_printf("ERROR: %s\n", str);
-	exit(0);
-}
+#include "../includes/server.h"
 
 // Function to check if a string is a number
 int	is_number(char *str)
@@ -36,4 +29,25 @@ int	is_number(char *str)
 		i++;
 	}
 	return (1);
+}
+
+// Function to close the program gracefully when receiving SIGINT
+void	close_program(int signum)
+{
+	ft_printf("\nCaught signal %d (SIGINT). Freeing memory before closing gracefully.\n", signum);
+	if (container)
+	{
+		if (container->msg)
+			free(container->msg);
+		free(container);
+	}
+	exit(0);
+}
+
+void	print_msg(char *client_pid, char *msg)
+{
+	ft_printf("MESSAGE RECEIVED FROM CLIENT PID %s :\n", client_pid);
+	free(client_pid);
+	ft_printf("%s\n", msg);
+	free(msg);
 }

@@ -6,11 +6,11 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 15:23:34 by christophed       #+#    #+#             */
-/*   Updated: 2025/01/04 14:44:11 by christophed      ###   ########.fr       */
+/*   Updated: 2025/01/04 18:22:24 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minitalk.h"
+#include "../includes/server.h"
 
 t_msg	*container;
 

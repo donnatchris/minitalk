@@ -6,18 +6,18 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 18:06:13 by christophed       #+#    #+#             */
-/*   Updated: 2025/01/04 15:01:45 by christophed      ###   ########.fr       */
+/*   Updated: 2025/01/04 18:08:41 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minitalk.h"
+#include "../includes/client.h"
 
 // Function to send a message to the server
 void	send_message(int server_pid, char *str)
 {
-	initialize_transmission(server_pid, str);
-	usleep(200);
+	send_pid(server_pid, getpid());
 	send_str(server_pid, str);
+	send_char(server_pid, '\0');
 }
 
 // Function to send a character to the server using only 0 and 1
@@ -53,44 +53,22 @@ void	send_str(int server_pid, char *str)
 	}
 }
 
-// Function to send an integer (from 1 to 999999) to the server using only 0 and 1
-void	send_int(int server_pid, int len)
+// Function to send our own pid (in a 10 characters format) to the server
+// If the pid is less than 10 characters long, we send 0 until the pid is 10 characters long
+void	send_pid(int server_pid, int client_pid)
 {
 	long	backup;
+	char	*pid;
 
-	backup = (long) len;
+	backup = (long) client_pid;
 	while (backup < 1000000000)
 	{
 		send_char(server_pid, '0');
 		backup *= 10;
 	}
-	send_str(server_pid, ft_itoa(len));
-}
-
-// Function to send the len of the string to the server
-void	initialize_transmission(int server_pid, char *str)
-{
-	int	len;
-
-	len = (int) ft_strlen(str);
-	ft_printf("len: %d\n", len);
-	if (len < 1)
-		error("The string is empty.");
-	if (len > 999999)
-		error("The string is too long.");
-	send_int(server_pid, len);
-}
-
-// Function to end the transmission by sending 8 SIGUSR1 signals
-void	end_transmission(int server_pid)
-{
-	int	i;
-
-	i = 0;
-	while (i < 8)
-	{
-		kill(server_pid, SIGUSR1);
-		usleep(100);
-		i++;
-	}
+	pid = ft_itoa(client_pid);
+	if (!pid)
+		error("memory allocation failed.");
+	send_str(server_pid, pid);
+	free(pid);
 }

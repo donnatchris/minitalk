@@ -6,20 +6,11 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 19:20:21 by christophed       #+#    #+#             */
-/*   Updated: 2025/01/04 15:06:33 by christophed      ###   ########.fr       */
+/*   Updated: 2025/01/04 18:13:42 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minitalk.h"
-
-// Function to initialize program
-void	initialize_receiver(void)
-{
-	ft_printf("initialize_receiver\n");
-	initialize_container();
-	signal(SIGUSR1, initialize_reception);
-	signal(SIGUSR2, initialize_reception);
-}
+#include "../includes/server.h"
 
 // Function to display an error message and reinitialize the receiver
 void	receiver_error(char *str)
@@ -28,89 +19,88 @@ void	receiver_error(char *str)
 	initialize_receiver();
 }
 
-// Function to initialize the reception of a signal
-void	initialize_reception(int signum)
+// Function to initialize the receiver
+// by initializing the container and the signals
+void	initialize_receiver(void)
 {
-	ft_printf("initialize_reception\n");
+	ft_printf("initialize_receiver\n");
+	initialize_container();
+	signal(SIGUSR1, receive_msg);
+	signal(SIGUSR2, receive_msg);
+}
+
+// Function to receive a message bit by bit
+// and send each complete caracter to the store_msg function
+void	receive_msg(int signum)
+{
+	ft_printf("receive_msg\n");
 	static char	c = 0;
 	static int	i = 0;
 
+	// if (container->receive_initializer == 0)
+	// {
+	// 	ft_printf("if receive_initializer\n");
+	// 	c = 0;
+	// 	i = 0;
+	// 	container->receive_initializer = 1;
+	// }
 	if (signum == SIGUSR2)
 		c |= 1 << i;
 	i++;
 	if (i == 8)
 	{
-		calculate_len(c);
+		store_msg(c);
 		i = 0;
 		c = 0;
 	}
 }
 
-// Function to store the first 6 characters of the received signals in an int
-void	calculate_len(char c)
+// Function to store the received message in a string
+// until a '\0' character is received
+void	store_msg(char c)
 {
-	ft_printf("calculate_len\n");
-	static int		i = 0;
-	static char		str[11];
-	int				len;
-
-	str[i] = c;
-	if (i == 9)
-	{
-		str[10] = '\0';
-		i = 0;
-		len = ft_atoi(str);
-		if (len == 0 || len > 999999)
-			receiver_error("message len must be between 1 and 999999 caracters");
-		container->len = len;
-		i = 0;
-		allocate_string_memory();
-		signal(SIGUSR1, start_reception);
-		signal(SIGUSR2, start_reception);
-	}
-	i++;
-}
-
-// Function to store the received signals in a string
-void	start_reception(int signum)
-{
-	ft_printf("start_reception\n");
-	static char	c = 0;
+	ft_printf("store_msg\n");
 	static int	i = 0;
 
-	if (signum == SIGUSR2)
-		c |= 1 << i;
-	i++;
-	if (i == 8)
+	if (container->store_initializer == 0)
 	{
-		store_message(c);
 		i = 0;
-		c = 0;
+		container->store_initializer = 1;
 	}
-}
-
-// Function to store the received signals in a string
-void	store_message(char c)
-{
-	ft_printf("store_message, c vaut %c: \n", c);
-	static int	i = 0;
-
 	container->msg[i] = c;
 	i++;
-	ft_printf("dans store message, message: %s\n", container->msg);
-	if (i == container->len)
-	{
-		i = 0;
+	if (c == '\0')
 		end_reception();
-	}
+	if (i == 500000)
+		receiver_error("message too long");
 }
 
-// Function to end the transmission while receiving 8 SIGUSR1 signals
+// Function to end the transmission by answering the client,
+// printing the received message in the terminal
+// and reinitialize the receiver
 void	end_reception(void)
 {
 	ft_printf("end_reception\n");
-	if (!container || !container->msg)
-		receiver_error("no message received");
-	ft_printf("%s\n", container->msg);
+	int		len;
+	char	*client_pid;
+	char	*msg;
+
+	len = ft_strlen(container->msg);
+	client_pid = ft_substr(container->msg, 0, 10);
+	if (client_pid == NULL)
+		receiver_error("allocation memory for PID failed");
+	msg = ft_substr(container->msg, 10, len - 10);
+	if (msg == NULL)
+	{
+		free(client_pid);
+		receiver_error("allocation memory for message failed");
+	}
+	if (!is_number(client_pid) || kill(ft_atoi(client_pid), SIGUSR1) == -1)
+	{
+		free(msg);
+		free(client_pid);
+		receiver_error("Invalid PID");
+	}
+	print_msg(client_pid, msg);
 	initialize_receiver();
 }
