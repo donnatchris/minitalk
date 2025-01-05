@@ -6,7 +6,7 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 19:20:21 by christophed       #+#    #+#             */
-/*   Updated: 2025/01/04 18:53:31 by christophed      ###   ########.fr       */
+/*   Updated: 2025/01/05 15:29:40 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void	receiver_error(char *str)
 void	initialize_receiver(void)
 {
 	initialize_container();
-	signal(SIGUSR1, receive_msg);
-	signal(SIGUSR2, receive_msg);
+	signal(SIGUSR1, wait_for_ping);
+	signal(SIGUSR2, wait_for_ping);
 }
 
 // Function to receive a message bit by bit

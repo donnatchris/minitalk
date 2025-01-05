@@ -6,7 +6,7 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 18:06:13 by christophed       #+#    #+#             */
-/*   Updated: 2025/01/04 18:38:10 by christophed      ###   ########.fr       */
+/*   Updated: 2025/01/05 15:40:54 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,17 @@
 // Function to send a message to the server
 void	send_message(int server_pid, char *str)
 {
+	send_ping(server_pid);
 	send_pid(server_pid, getpid());
 	send_str(server_pid, str);
 	send_char(server_pid, '\0');
+}
+
+// Function to send a ping signal to the server
+void	send_ping(int server_pid)
+{
+	kill(server_pid, SIGUSR1);
+	usleep(200);
 }
 
 // Function to send a character to the server using only 0 and 1

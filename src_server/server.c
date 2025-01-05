@@ -6,7 +6,7 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 13:36:15 by christophed       #+#    #+#             */
-/*   Updated: 2025/01/04 18:57:41 by christophed      ###   ########.fr       */
+/*   Updated: 2025/01/05 17:36:46 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,16 @@ void	print_msg(char *client_pid, char *msg)
 	free(client_pid);
 	ft_printf(YELLOW "%s" RESET "\n", msg);
 	free(msg);
+}
+
+// Function to wait for a signal
+void	wait_for_ping(int signum)
+{
+	if (signum == SIGUSR1 || signum == SIGUSR2)
+	{
+		container->signal_received = 1;
+		ft_printf("Signal received, waiting for message...\n");
+		signal(SIGUSR1, receive_msg);
+		signal(SIGUSR2, receive_msg);
+	}
 }

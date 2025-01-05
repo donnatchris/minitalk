@@ -6,7 +6,7 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 18:00:36 by christophed       #+#    #+#             */
-/*   Updated: 2025/01/04 18:56:32 by christophed      ###   ########.fr       */
+/*   Updated: 2025/01/05 17:37:33 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ typedef struct s_msg
 	char	*msg;
 	int		receive_initializer;
 	int		store_initializer;
+	int		signal_received;
+	int		time;
 }			t_msg;
 
 // Global variable
@@ -58,6 +60,7 @@ void	end_reception(void);
 // functions to allocate and free memory
 void	allocate_container_memory(void);
 void	initialize_container(void);
-void	ft_free_container(t_msg *container);
+void	ft_free_container(void);
+void	wait_for_ping(int signum);
 
 #endif

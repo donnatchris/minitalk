@@ -11,12 +11,12 @@ The client must communicate the provided string to the server.
 Once the server has received the entire string, it must display it.
 The server should display the string quickly. If you feel the process is too slow, it probably is.
 The server must be able to receive strings from multiple clients consecutively without needing to be restarted.
+Communication between your programs must be performed exclusively using UNIX signals.
 You may only use the two signals: SIGUSR1 and SIGUSR2.
 BONUS
 The list of possible bonus features includes:
 - The server confirms the reception of each message by sending a signal to the client.
 - Support for Unicode characters.
-- Communication between your programs must be performed exclusively using UNIX signals.
 
 ARCHITECTURE:
 - src_client/ directory for client src files
@@ -180,25 +180,6 @@ pause()
 	The function is commonly used in programs that need to wait for a signal (like SIGINT) before resuming execution.
 	Once the signal is received, the program resumes execution after handling the signal.
 
-signal()
-	prototype:
-		#include <signal.h>
-		void (*signal(int signum, void (*handler)(int)))(int);
-	The signal function in C is used to associate a specific signal (like SIGINT for interrupt or SIGTERM for termination)
-	with a custom handler function. This handler is executed when the process receives the signal.
-	The function takes two arguments: the signal number (signum) and a pointer to the handler function,
-	which must follow the prototype:
-		void handler(int).
-	Alternatively, you can use SIG_IGN to ignore the signal or SIG_DFL to restore its default behavior.
-	If the program enters other functions or threads,
-	the signal handler remains valid unless overridden by another signal() or sigaction() call.
-	If you call signal(signum, ...) again within the program, it will overwrite the previous handler.
-	You can restore the default behavior using signal(signum, SIG_DFL).
-	Limitations:
-	While signal is simple to use, it has limitations, such as platform-dependent behavior and potential issues with reentrancy.
-	For better portability and finer control over signal handling, the modern alternative sigaction is recommended.
-	Some signals, like SIGKILL and SIGSTOP, cannot be caught or ignored, as they are managed exclusively by the operating system.
-
 sleep()
 	prototype:
 		#include <unistd.h>
@@ -217,3 +198,118 @@ usleep()
 	usleep() is typically used when shorter delays than one second are needed, such as in applications requiring high precision or brief pauses.
 	However, it may not be highly accurate due to the way the operating system handles timing and other concurrent processes.
 	For more precise delays, nanosleep() is often preferred.
+
+signal()
+	prototype:
+		#include <signal.h>
+		void (*signal(int signum, void (*handler)(int)))(int);
+	The signal function in C is used to associate a specific signal (like SIGINT for interrupt or SIGTERM for termination)
+	with a custom handler function. This handler is executed when the process receives the signal.
+	The function takes two arguments: the signal number (signum) and a pointer to the handler function,
+	which must follow the prototype:
+		void handler(int).
+	Alternatively, you can use SIG_IGN to ignore the signal or SIG_DFL to restore its default behavior.
+	If the program enters other functions or threads,
+	the signal handler remains valid unless overridden by another signal() or sigaction() call.
+	If you call signal(signum, ...) again within the program, it will overwrite the previous handler.
+	You can restore the default behavior using signal(signum, SIG_DFL).
+	Limitations:
+		While signal is simple to use, it has limitations, such as platform-dependent behavior and potential issues with reentrancy.
+		For better portability and finer control over signal handling, the modern alternative sigaction is recommended.
+		Some signals, like SIGKILL and SIGSTOP, cannot be caught or ignored, as they are managed exclusively by the operating system.
+
+sigaction()
+	prototype
+		#include <signal.h>
+		int sigaction(int signum, const struct sigaction *act, struct sigaction *oldact);
+	The sigaction() function in C is used to define a signal handler for specific signals,
+	providing more control and flexibility compared to the older signal() function.
+	It allows you to specify a handler function, a set of signals to block while the handler is executing, and various options through the sigaction structure.
+	It is part of the POSIX standard and is preferred for modern applications due to its ability to handle signals in a more reliable and consistent manner.
+	By using sigaction(), you can manage how your program responds to different signals,
+	ensuring proper handling of asynchronous events such as interrupts, terminations, and other system signals.
+	sigaction() returns 0 on success and -1 on error, and sets errno to indicate the error.
+
+sigaction structure
+	The sigaction structure in C is used to define how a program handles specific signals.
+	The structure includes several members:
+	sa_handler:
+		A pointer to a function that will be called when the specified signal is received.
+		This function takes an integer argument representing the signal number.
+	sa_sigaction:
+		A pointer to an advanced signal handling function that can provide additional information about the signal.
+		This is used when the SA_SIGINFO flag is set in sa_flags.
+	sa_mask:
+		A sigset_t variable that specifies a set of signals to be blocked while the signal handler is executing.
+		This helps prevent other signals from interrupting the handler.
+	sa_flags:
+		An integer that specifies options for signal handling,
+		such as SA_RESTART to restart interrupted system calls or SA_SIGINFO to use the sa_sigaction handler.
+	sa_restorer:
+		Reserved for future use and generally ignored.
+	By using the sigaction structure, you can manage how your program responds to different signals,
+	ensuring proper handling of asynchronous events such as interrupts, terminations, and other system signals.
+	This structure is part of the POSIX standard.
+
+sa_flags in the sigaction structure
+	The sa_flags field in the sigaction structure specifies options for signal handling. Here are the main flags you can use:
+	SA_NOCLDSTOP:
+		Prevents the sending of SIGCHLD when child processes stop or resume.
+		Useful for ignoring notifications of child process state changes.
+	SA_NOCLDWAIT:
+		Indicates that child processes should not become zombie processes when they terminate.
+		The system automatically reaps terminated child processes without requiring a wait() call.
+	SA_NODEFER:
+		Does not block the signal that triggered the handler during the execution of the handler.
+		By default, the signal that triggered the handler is blocked during its execution.
+	SA_ONSTACK:
+		Uses an alternate signal stack specified by sigaltstack() for executing the signal handler.
+		Useful for handling signals when the main stack is full or corrupted.
+	SA_RESETHAND:
+		Resets the signal handler to its default action (SIG_DFL) after the handler is executed.
+		The signal handler will only be executed once.
+	SA_RESTART:
+		Restarts interrupted system calls instead of failing with EINTR.
+		Useful for avoiding EINTR errors during certain system calls.
+	SA_SIGINFO:
+		Uses the sa_sigaction handler instead of sa_handler.
+		Provides additional information about the signal via a siginfo_t structure.
+
+sigemptystet()
+	prototype
+		#include <signal.h>
+		int sigemptyset(sigset_t *set);
+	The sigemptyset() function in C is used to initialize a signal set to be empty, meaning it removes all signals from the set.
+	This function is often used in conjunction with other signal handling functions to configure signal masks.
+	To use sigemptyset():
+	- first declare a sigset_t variable
+	- then call sigemptyset() with a pointer to this variable
+	This prepares the signal set for further manipulation, such as adding specific signals with sigaddset().
+	By initializing the set to be empty, you ensure that only the signals you explicitly add will be included in the set,
+	allowing for precise control over which signals are blocked or handled in your program.
+	sigemptyset() returns 0 on success and -1 on error, and sets errno to indicate the error.
+
+
+sigset_t
+	The sigset_t type in C is used to represent a set of signals.
+	It is defined in the <signal.h> header and is used for manipulating signal sets in various signal handling functions.
+	Functions such as sigemptyset(), sigfillset(), sigaddset(), sigdelset(), and sigismember() operate on sigset_t variables
+	to initialize, add, remove, and check for signals within the set.
+	If you declare a variable of type sigset_t but do not initialize it with sigemptyset() or another initialization function like sigfillset(),
+	the contents of this variable will be undefined.
+	This means that the signal set could contain random values, which can lead to unpredictable behavior when you try to manipulate or use this signal set.
+
+sigaddset()
+	prototype
+		#include <signal.h>
+		int sigaddset(sigset_t *set, int signum);
+	The sigaddset() function in C is used to add a specific signal to a signal set (sigset_t).
+	This function is typically used in conjunction with other signal handling functions to configure which signals should be blocked or handled.
+	To use sigaddset():
+	- first initialize a sigset_t variable (often with sigemptyset() to start with an empty set)
+	- then call sigaddset() with a pointer to this variable and the signal number you want to add
+	By adding signals to the set, you can precisely control which signals are included, allowing for effective signal management in your program.
+	sigaddset() returns 0 on success and -1 on error, and sets errno to indicate the error.
+
+
+
