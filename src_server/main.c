@@ -6,13 +6,13 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 15:23:34 by christophed       #+#    #+#             */
-/*   Updated: 2025/01/05 22:31:26 by christophed      ###   ########.fr       */
+/*   Updated: 2025/01/05 23:02:03 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/server.h"
 
-t_msg	*g_container;
+t_msg	*g_container = NULL;
 
 int	main(void)
 {

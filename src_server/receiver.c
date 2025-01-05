@@ -6,7 +6,7 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 19:20:21 by christophed       #+#    #+#             */
-/*   Updated: 2025/01/05 22:24:52 by christophed      ###   ########.fr       */
+/*   Updated: 2025/01/05 23:10:56 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	store_msg(char c)
 	i++;
 	if (c == '\0')
 		end_reception();
-	if (i == 500000)
+	else if (i == 10000)
 		receiver_error("message too long");
 }
 
