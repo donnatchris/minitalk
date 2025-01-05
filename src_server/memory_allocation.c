@@ -6,7 +6,7 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 13:39:18 by christophed       #+#    #+#             */
-/*   Updated: 2025/01/05 17:37:18 by christophed      ###   ########.fr       */
+/*   Updated: 2025/01/05 21:20:29 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	initialize_container(void)
 		if (!container->msg)
 		{
 			ft_free_container();
-			ft_printf("ERROR: allocation memory for container failed");
+			ft_printf("ERROR: allocation memory for container->msg failed");
 			exit(1);
 		}
 		container->receive_initializer = 0;

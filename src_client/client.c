@@ -6,7 +6,7 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 15:49:48 by christophed       #+#    #+#             */
-/*   Updated: 2025/01/04 18:59:04 by christophed      ###   ########.fr       */
+/*   Updated: 2025/01/05 20:40:28 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,5 @@ void	confirmation(int signum)
 {
 	ft_printf("Message sent. ");
 	ft_printf("The server has confirmed by sending signal %d \n", signum);
+	exit(0);
 }

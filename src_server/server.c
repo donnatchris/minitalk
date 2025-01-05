@@ -6,7 +6,7 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 13:36:15 by christophed       #+#    #+#             */
-/*   Updated: 2025/01/05 17:36:46 by christophed      ###   ########.fr       */
+/*   Updated: 2025/01/05 21:24:21 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	close_program(int signum)
 
 void	print_msg(char *client_pid, char *msg)
 {
-	ft_printf("Message received from client PID number: %s :\n", client_pid);
+	ft_printf("Message received from client PID number %s :\n", client_pid);
 	free(client_pid);
 	ft_printf(YELLOW "%s" RESET "\n", msg);
 	free(msg);
