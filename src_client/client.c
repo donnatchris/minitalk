@@ -6,7 +6,7 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 15:49:48 by christophed       #+#    #+#             */
-/*   Updated: 2025/01/05 20:40:28 by christophed      ###   ########.fr       */
+/*   Updated: 2025/01/05 22:17:58 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 // Function to display an error message and exit the program
 void	error(char *str)
 {
-	ft_printf("ERROR: %s\n", str);
+	ft_printf("\x1b[31mERROR:\x1b[0m %s\n", str);
 	exit(1);
 }
 
@@ -56,7 +56,8 @@ int	check_pid(char *str)
 // Function confirm that the server has answered
 void	confirmation(int signum)
 {
-	ft_printf("Message sent. ");
-	ft_printf("The server has confirmed by sending signal %d \n", signum);
+	(void) signum;
+	ft_printf("\x1b[32mMessage sent. \x1b[0m");
+	ft_printf("\x1b[32mServer has confirmed by sending a signal.\x1b[0m\n");
 	exit(0);
 }

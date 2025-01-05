@@ -6,13 +6,13 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 15:23:34 by christophed       #+#    #+#             */
-/*   Updated: 2025/01/05 21:46:39 by christophed      ###   ########.fr       */
+/*   Updated: 2025/01/05 22:31:26 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/server.h"
 
-t_msg	*container;
+t_msg	*g_container;
 
 int	main(void)
 {
@@ -23,16 +23,16 @@ int	main(void)
 	initialize_receiver();
 	while (1)
 	{
-		if (container->signal_received == 1)
+		if (g_container->signal_received == 1)
 		{
 			usleep(100);
-			if (container->time == 1000000)
+			if (g_container->time == 1000000)
 			{
 				receiver_error("Transmission too long. Communication aborted.");
-				container->signal_received = 0;
+				g_container->signal_received = 0;
 			}
 			else
-				container->time += 100;
+				g_container->time += 100;
 		}
 	}
 	return (0);

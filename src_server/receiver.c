@@ -6,7 +6,7 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 19:20:21 by christophed       #+#    #+#             */
-/*   Updated: 2025/01/05 18:35:06 by christophed      ###   ########.fr       */
+/*   Updated: 2025/01/05 22:24:52 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 // Function to display an error message and reinitialize the receiver
 void	receiver_error(char *str)
 {
-	ft_printf("RECEPTION ERROR: %s\n", str);
+	ft_printf("\x1b[31mRECEPTION ERROR:\x1b[0m %s\n", str);
 	initialize_receiver();
 }
 
@@ -36,11 +36,11 @@ void	receive_msg(int signum)
 	static char	c = 0;
 	static int	i = 0;
 
-	if (container->receive_initializer == 0)
+	if (g_container->receive_initializer == 0)
 	{
 		c = 0;
 		i = 0;
-		container->receive_initializer = 1;
+		g_container->receive_initializer = 1;
 	}
 	if (signum == SIGUSR2)
 		c |= 1 << i;
@@ -59,12 +59,12 @@ void	store_msg(char c)
 {
 	static int	i = 0;
 
-	if (container->store_initializer == 0)
+	if (g_container->store_initializer == 0)
 	{
 		i = 0;
-		container->store_initializer = 1;
+		g_container->store_initializer = 1;
 	}
-	container->msg[i] = c;
+	g_container->msg[i] = c;
 	i++;
 	if (c == '\0')
 		end_reception();
@@ -81,11 +81,11 @@ void	end_reception(void)
 	char	*client_pid;
 	char	*msg;
 
-	len = ft_strlen(container->msg);
-	client_pid = ft_substr(container->msg, 0, 10);
+	len = ft_strlen(g_container->msg);
+	client_pid = ft_substr(g_container->msg, 0, 10);
 	if (client_pid == NULL)
 		receiver_error("allocation memory for PID failed");
-	msg = ft_substr(container->msg, 10, len - 10);
+	msg = ft_substr(g_container->msg, 10, len - 10);
 	if (msg == NULL)
 	{
 		free(client_pid);

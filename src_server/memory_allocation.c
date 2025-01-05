@@ -6,7 +6,7 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 13:39:18 by christophed       #+#    #+#             */
-/*   Updated: 2025/01/05 21:20:29 by christophed      ###   ########.fr       */
+/*   Updated: 2025/01/05 22:32:22 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,45 +15,45 @@
 // Function to allocate memory for the t_msg variable
 void	allocate_container_memory(void)
 {
-	container = (t_msg *) malloc(sizeof(t_msg));
-	if (!container)
+	g_container = (t_msg *) malloc(sizeof(t_msg));
+	if (!g_container)
 	{
 		ft_printf("ERROR: allocation memory for container failed");
 		exit(1);
 	}
 }
 
-// Function to initialize the container variables
+// Function to initialize the g_container variables
 void	initialize_container(void)
 {
-	if (container)
+	if (g_container)
 	{
-		if (container->msg)
+		if (g_container->msg)
 		{
-			free(container->msg);
-			container->msg = NULL;
+			free(g_container->msg);
+			g_container->msg = NULL;
 		}
-		container->msg = (char *) ft_calloc(500001, sizeof(char));
-		if (!container->msg)
+		g_container->msg = (char *) ft_calloc(500001, sizeof(char));
+		if (!g_container->msg)
 		{
 			ft_free_container();
 			ft_printf("ERROR: allocation memory for container->msg failed");
 			exit(1);
 		}
-		container->receive_initializer = 0;
-		container->store_initializer = 0;
-		container->signal_received = 0;
-		container->time = 0;
+		g_container->receive_initializer = 0;
+		g_container->store_initializer = 0;
+		g_container->signal_received = 0;
+		g_container->time = 0;
 	}
 }
 
-// Function to free the memory allocated for the container and its variables
+// Function to free the memory allocated for the g_container and its variables
 void	ft_free_container(void)
 {
-	if (container)
+	if (g_container)
 	{
-		if (container->msg)
-			free(container->msg);
-		free(container);
+		if (g_container->msg)
+			free(g_container->msg);
+		free(g_container);
 	}
 }
