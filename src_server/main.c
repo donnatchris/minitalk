@@ -6,7 +6,7 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 15:23:34 by christophed       #+#    #+#             */
-/*   Updated: 2025/01/05 18:33:42 by christophed      ###   ########.fr       */
+/*   Updated: 2025/01/05 21:46:39 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,10 @@ t_msg	*container;
 int	main(void)
 {
 	signal(SIGINT, close_program);
+	ft_printf("SERVER PID: %d\n", getpid());
+	ft_printf("Press CTRL + C if you want to close the server.\n");
 	allocate_container_memory();
 	initialize_receiver();
-	ft_printf("SERVER PID: %d\n", getpid());
 	while (1)
 	{
 		if (container->signal_received == 1)
@@ -33,6 +34,6 @@ int	main(void)
 			else
 				container->time += 100;
 		}
-    }
+	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 13:36:15 by christophed       #+#    #+#             */
-/*   Updated: 2025/01/05 21:24:21 by christophed      ###   ########.fr       */
+/*   Updated: 2025/01/05 21:51:47 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	is_number(char *str)
 // Function to close the program gracefully when receiving SIGINT
 void	close_program(int signum)
 {
-	ft_printf("\nCaught signal %d (SIGINT). Freeing memory before closing gracefully.\n", signum);
+	ft_printf("\nCaught signal %d. Freeing memory before closing.\n", signum);
 	if (container)
 	{
 		if (container->msg)

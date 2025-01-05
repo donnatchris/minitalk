@@ -6,7 +6,7 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 18:06:13 by christophed       #+#    #+#             */
-/*   Updated: 2025/01/05 15:40:54 by christophed      ###   ########.fr       */
+/*   Updated: 2025/01/05 21:29:46 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ void	send_str(int server_pid, char *str)
 }
 
 // Function to send our own pid (in a 10 characters format) to the server
-// If the pid is less than 10 characters long, we send 0 until the pid is 10 characters long
+// If the pid is less than 10 characters long,
+// we send 0 until the pid is 10 characters long
 void	send_pid(int server_pid, int client_pid)
 {
 	long	backup;
