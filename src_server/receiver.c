@@ -6,7 +6,7 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 19:20:21 by christophed       #+#    #+#             */
-/*   Updated: 2025/01/05 15:29:40 by christophed      ###   ########.fr       */
+/*   Updated: 2025/01/05 18:35:06 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	receiver_error(char *str)
 // by initializing the container and the signals
 void	initialize_receiver(void)
 {
+	ft_printf("Receiver initialized. Waiting for signal...\n");
 	initialize_container();
 	signal(SIGUSR1, wait_for_ping);
 	signal(SIGUSR2, wait_for_ping);
@@ -89,6 +90,7 @@ void	end_reception(void)
 	{
 		free(client_pid);
 		receiver_error("allocation memory for message failed");
+		return ;
 	}
 	usleep(100);
 	if (!is_number(client_pid) || kill(ft_atoi(client_pid), SIGUSR1) == -1)
@@ -96,6 +98,7 @@ void	end_reception(void)
 		free(msg);
 		free(client_pid);
 		receiver_error("Invalid PID");
+		return ;
 	}
 	print_msg(client_pid, msg);
 	initialize_receiver();
