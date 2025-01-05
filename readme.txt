@@ -36,8 +36,11 @@ make
 	when the client sends a message to the server, the server writes the message sent
 	and sends a confirmation to the client
 ./client <server PID> "<Your message>"
-	the client send <Your message> to the server which has the <server PID> PID
+	the client sends <Your message> to the server which has the <server PID> PID
 	and then wait for a response from the server
+kill -SIGUSR1 <server PID>
+	sends a unique signal to the server so that you can see what is happening
+	when the server cannot receive a complete message
 
 DOCUMENTATION:
 
@@ -310,6 +313,3 @@ sigaddset()
 	- then call sigaddset() with a pointer to this variable and the signal number you want to add
 	By adding signals to the set, you can precisely control which signals are included, allowing for effective signal management in your program.
 	sigaddset() returns 0 on success and -1 on error, and sets errno to indicate the error.
-
-
-
