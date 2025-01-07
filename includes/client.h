@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   client.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
+/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 17:57:35 by christophed       #+#    #+#             */
-/*   Updated: 2025/01/05 16:14:07 by christophed      ###   ########.fr       */
+/*   Updated: 2025/01/07 14:56:47 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,8 @@ void	confirmation(int signum);
 // transmitter.c
 // functions to send messages by using 2 signals
 void	send_message(int server_pid, char *str);
-void	send_ping(int server_pid);
 void	send_char(int server_pid, char c);
 void	send_str(int server_pid, char *str);
-void	send_pid(int server_pid, int client_pid);
+void	send_len(int server_pid, int len);
 
 #endif

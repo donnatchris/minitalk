@@ -6,7 +6,7 @@
 /*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 18:00:36 by christophed       #+#    #+#             */
-/*   Updated: 2025/01/07 13:04:12 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/01/07 14:50:31 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 typedef struct s_msg
 {
 	char	*msg;
+	char	*len_str;
 	int		pid;
 	int		len;
 }			t_msg;
@@ -31,23 +32,18 @@ typedef struct s_msg
 extern t_msg	*g_container;
 
 // Functions
-// server.c
-// various functions
 void	close_program(int signum);
-void	print_msg(char *client_pid, char *msg);
-int		is_number(char *str);
-// receiver.c
-// unctions to receive messages by signals
-void	receiver_error(char *str);
-void	initialize_receiver(void);
-void	receive_msg(int signum);
-void	store_msg(char c);
-void	end_reception(void);
-// memory_allocation.c
-// functions to allocate and free memory
-void	allocate_container_memory(void);
 void	initialize_container(void);
-void	ft_free_container(void);
-void	wait_for_ping(int signum);
+void	error(char *str);
+void	initialize_len(void);
+void    check_msg_len(int signum, siginfo_t *info, void *context);
+void	confirm_bit_reception(void);
+void    store_msg_len(char c);
+void    initialize_msg(void);
+void    receive_msg(int signum, siginfo_t *info, void *context);
+void    store_msg(char c);
+void	end_reception(void);
+int		is_number(char *str);
+
 
 #endif

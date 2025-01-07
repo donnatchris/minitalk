@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
+/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 15:49:48 by christophed       #+#    #+#             */
-/*   Updated: 2025/01/05 22:17:58 by christophed      ###   ########.fr       */
+/*   Updated: 2025/01/07 15:01:20 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int	check_pid(char *str)
 		error("Invalid PID, only positive numbers are allowed.");
 	if (kill(pid, 0) == -1)
 		error("Invalid PID, the process does not exist.");
+	ft_printf("%d\n", pid);
 	return (pid);
 }
 
