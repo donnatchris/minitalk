@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   receiver.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
+/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 19:20:21 by christophed       #+#    #+#             */
-/*   Updated: 2025/01/05 23:10:56 by christophed      ###   ########.fr       */
+/*   Updated: 2025/01/07 11:06:42 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

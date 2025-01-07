@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
+/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 18:00:36 by christophed       #+#    #+#             */
-/*   Updated: 2025/01/05 22:24:05 by christophed      ###   ########.fr       */
+/*   Updated: 2025/01/07 13:04:12 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,8 @@
 typedef struct s_msg
 {
 	char	*msg;
-	int		receive_initializer;
-	int		store_initializer;
-	int		signal_received;
-	int		time;
+	int		pid;
+	int		len;
 }			t_msg;
 
 // Global variable

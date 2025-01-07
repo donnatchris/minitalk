@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   transmitter.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
+/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 18:06:13 by christophed       #+#    #+#             */
-/*   Updated: 2025/01/05 21:29:46 by christophed      ###   ########.fr       */
+/*   Updated: 2025/01/07 11:05:16 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,9 @@
 // Function to send a message to the server
 void	send_message(int server_pid, char *str)
 {
-	send_ping(server_pid);
-	send_pid(server_pid, getpid());
+	send_len(server_pid, ft_strlen(str));
 	send_str(server_pid, str);
 	send_char(server_pid, '\0');
-}
-
-// Function to send a ping signal to the server
-void	send_ping(int server_pid)
-{
-	kill(server_pid, SIGUSR1);
-	usleep(200);
 }
 
 // Function to send a character to the server using only 0 and 1
@@ -42,8 +34,8 @@ void	send_char(int server_pid, char c)
 		if (c & 1 << i)
 			kill(server_pid, SIGUSR2);
 		else
-			kill(server_pid, SIGUSR1);
-		usleep(100);
+			kill(server_pid, SIGUSR1);+
+		pause();
 		i++;
 	}
 }
@@ -64,20 +56,20 @@ void	send_str(int server_pid, char *str)
 // Function to send our own pid (in a 10 characters format) to the server
 // If the pid is less than 10 characters long,
 // we send 0 until the pid is 10 characters long
-void	send_pid(int server_pid, int client_pid)
+void	send_len(int server_pid, int len)
 {
 	long	backup;
-	char	*pid;
+	char	*msg_len;
 
-	backup = (long) client_pid;
+	backup = (long) len;
 	while (backup < 1000000000)
 	{
 		send_char(server_pid, '0');
 		backup *= 10;
 	}
-	pid = ft_itoa(client_pid);
-	if (!pid)
+	msg_len = ft_itoa(len);
+	if (!msg_len)
 		error("memory allocation failed.");
-	send_str(server_pid, pid);
-	free(pid);
+	send_str(server_pid, msg_len);
+	free(msg_len);
 }

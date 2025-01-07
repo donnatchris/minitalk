@@ -1,0 +1,16 @@
+- envoi du strlen sur 10 caracteres 
+- l expediteur
+    - attend signal de retour avant d envoyer le bit suivant
+    - en verifiant le PID du server
+    - controle le temps d arrivee du signal de confirmation (fonction pause a coder)
+- le recepteur controle a chaque bit
+    - PID de l expe
+    - si l expe existe
+    - temps entre chaque bit
+- stocke dans un chaine msg_len de malloc 10 + /0
+- controle ce msg_len (que ce soit un int)
+    - si pas ok abort
+    - si ok malloc le msg
+- envoi et reception du message
+- envoi du /0 pour cloturer
+- imprimer le message et envoyer la confirmation au client
