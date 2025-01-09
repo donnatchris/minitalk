@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   receiver.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
+/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 14:37:47 by nifromon          #+#    #+#             */
-/*   Updated: 2025/01/09 10:41:42 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/01/09 23:05:21 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,25 +19,26 @@ void	check_msg_len(int signum, siginfo_t *info, void *context)
 	static int	i = 0;
 
 	(void) context;
+	if (g_container->check_msg_len == 0)
+	{
+		g_container->check_msg_len = 1;
+		c = 0;
+		i = 0;
+	}
 	g_container->chrono_on = 1;
 	g_container->time = 0;
 	if (g_container->pid == -100)
-	{
 		g_container->pid = info->si_pid;
-	}
 	if (info->si_pid == g_container->pid)
 	{
 		if (signum == SIGUSR2)
 			c |= 1 << i;
 		i++;
 		if (i == 8)
-		{
 			store_msg_len(c);
-			i = 0;
-			c = 0;
-		}
+		if (i == 8)
+			g_container->check_msg_len = 0;
 	}
-	g_container->time = 0;
 	confirm_bit_reception();
 }
 
@@ -47,6 +48,11 @@ void	store_msg_len(char c)
 {
 	static int	i = 0;
 
+	if (g_container->store_msg_len == 0)
+	{
+		g_container->store_msg_len = 1;
+		i = 0;
+	}
 	g_container->time = 0;
 	g_container->len_str[i] = c;
 	i++;
@@ -71,6 +77,12 @@ void	receive_msg(int signum, siginfo_t *info, void *context)
 	static int	i = 0;
 
 	(void) context;
+	if (g_container->receive_msg == 0)
+	{
+		g_container->receive_msg = 1;
+		c = 0;
+		i = 0;
+	}
 	g_container->time = 0;
 	if (info->si_pid == g_container->pid)
 	{
@@ -93,6 +105,11 @@ void	store_msg(char c)
 {
 	static int	i = 0;
 
+	if (g_container->store_msg == 0)
+	{
+		g_container->store_msg = 1;
+		i = 0;
+	}
 	g_container->time = 0;
 	g_container->msg[i] = c;
 	i++;

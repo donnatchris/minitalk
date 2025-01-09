@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
+/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 13:19:30 by nifromon          #+#    #+#             */
-/*   Updated: 2025/01/09 10:41:17 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/01/09 22:52:01 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,11 @@ typedef struct s_msg
 	int		len;
 	int		chrono_on;
 	int		time;
+	int		check_msg_len;
+	int		store_msg_len;
+	int		receive_msg;
+	int		store_msg;
+	int		check_bit;
 }			t_msg;
 
 // Global variable

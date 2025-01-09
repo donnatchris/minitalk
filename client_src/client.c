@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
+/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 14:35:16 by nifromon          #+#    #+#             */
-/*   Updated: 2025/01/09 12:00:12 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/01/09 23:25:04 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 void	error(char *str)
 {
 	ft_printf("\x1b[31mERROR:\x1b[0m %s\n", str);
+	if (g_client)
+		free(g_client);
 	exit(1);
 }
 
@@ -55,13 +57,36 @@ int	check_pid(char *str)
 
 // Function to confirm that the server has received a bit (SIGUSR2)
 // or the entire message (SIGUSR1)
-void	confirm(int signum)
+void	confirm(int signum, siginfo_t *info, void *context)
 {
-	g_confirmed = 1;
+	(void)	context;
+	if (g_client->pid == -100)
+		g_client->pid = info->si_pid;
+	else if (g_client->pid != info->si_pid)
+		return ;
+	g_client->confirmed = 1;
 	if (signum == SIGUSR1)
 	{
+		if (g_client)
+			free(g_client);
 		ft_printf("\x1b[32mMessage sent. \x1b[0m");
 		ft_printf("\x1b[32mServer has confirmed by sending a signal.\x1b[0m\n");
 		exit(0);
 	}
+}
+
+// Function to initialize the signal handler for the confirmation
+void	initialize_confirmation(void)
+{
+	struct sigaction	act;
+
+	sigemptyset(&act.sa_mask);
+	sigaddset(&act.sa_mask, SIGUSR1);
+	sigaddset(&act.sa_mask, SIGUSR2);
+	act.sa_flags = SA_SIGINFO;
+	act.sa_sigaction = confirm;
+	if (sigaction(SIGUSR1, &act, NULL) == -1)
+		error("sigaction error");
+	if (sigaction(SIGUSR2, &act, NULL) == -1)
+		error("sigaction error");
 }

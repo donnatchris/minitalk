@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initializer.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
+/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 14:56:41 by nifromon          #+#    #+#             */
-/*   Updated: 2025/01/09 12:08:55 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/01/09 23:10:15 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,20 @@
 // Function to initialize the g_container variables
 void	initialize_container(void)
 {
-	if (g_container)
+	if (g_container->msg)
 	{
-		if (g_container->msg)
-		{
-			free(g_container->msg);
-			g_container->msg = NULL;
-		}
-		g_container->pid = -100;
-		g_container->len = 0;
-		g_container->chrono_on = 0;
-		g_container->time = 0;
-		ft_bzero(g_container->len_str, 11);
+		free(g_container->msg);
+		g_container->msg = NULL;
 	}
+	g_container->pid = -100;
+	g_container->len = 0;
+	g_container->chrono_on = 0;
+	g_container->time = 0;
+	g_container->check_msg_len = 0;
+	g_container->store_msg_len = 0;
+	g_container->receive_msg = 0;
+	g_container->store_msg = 0;
+	ft_bzero(g_container->len_str, 11);
 }
 
 // Function to initialize reception by waiting for msg_len

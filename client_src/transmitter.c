@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   transmitter.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
+/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 14:36:21 by nifromon          #+#    #+#             */
-/*   Updated: 2025/01/09 11:50:14 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/01/09 23:18:47 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ void	send_char(int server_pid, char c)
 		else
 			kill(server_pid, SIGUSR1);
 		i++;
-		g_confirmed = 0;
+		g_client->confirmed = 0;
 		timer = 0;
-		while (!g_confirmed)
+		while (!g_client->confirmed)
 		{
 			usleep(100);
 			timer++;
