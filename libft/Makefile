@@ -3,61 +3,92 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+         #
+#    By: nifromon <nifromon@student.42perpignan.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/12/26 08:59:54 by christophed       #+#    #+#              #
-#    Updated: 2024/12/26 09:27:33 by christophed      ###   ########.fr        #
+#    Created: 2025/01/06 05:37:45 by nifromon          #+#    #+#              #
+#    Updated: 2025/01/06 13:03:09 by nifromon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-#############################################################
-## ARGUMENTS
+# Arguments
+NAME =				libft.a
+CC = 				gcc
+CFLAGS = 			-Wall -Wextra -Werror
+INCLUDES =			-I $(LIBFT_H) -I $(FT_PRINTF_H) -I $(GET_NEXT_LINE_H)
 
-NAME			= libft.a
-CFLAGS			= -Wall -Wextra -Werror
-CC				= gcc
-INCLUDES		= -I includes/
+# Repositories
+SRCS_DIR =			src
+LIBFT_SRC =			$(SRCS_DIR)/libft_SRC
+FT_PRINTF_SRC = 	$(SRCS_DIR)/ft_printf_SRC
+GET_NEXT_LINE_SRC =	$(SRCS_DIR)/get_next_line_SRC
+HEADERS_DIR =		headers
+LIBFT_H =			$(HEADERS_DIR)/libft_H/
+FT_PRINTF_H =		$(HEADERS_DIR)/ft_printf_H/
+GET_NEXT_LINE_H =	$(HEADERS_DIR)/get_next_line_H/
+OBJS_DIR =			obj
 
-#############################################################
-## SOURCES
+# Utils
+AR =				ar -rcs
+RM =				rm -rf
 
-SRC_DIR			= src/
+# Sources and Objects
+SRCS = 				\
+					$(LIBFT_SRC)/ft_isalpha.c $(LIBFT_SRC)/ft_isdigit.c \
+					$(LIBFT_SRC)/ft_isalnum.c $(LIBFT_SRC)/ft_isascii.c \
+					$(LIBFT_SRC)/ft_isprint.c $(LIBFT_SRC)/ft_strlen.c \
+					$(LIBFT_SRC)/ft_memset.c $(LIBFT_SRC)/ft_bzero.c \
+					$(LIBFT_SRC)/ft_memcpy.c $(LIBFT_SRC)/ft_memmove.c \
+					$(LIBFT_SRC)/ft_strlcpy.c $(LIBFT_SRC)/ft_strlcat.c \
+					$(LIBFT_SRC)/ft_toupper.c $(LIBFT_SRC)/ft_tolower.c \
+					$(LIBFT_SRC)/ft_strchr.c $(LIBFT_SRC)/ft_strrchr.c \
+					$(LIBFT_SRC)/ft_strncmp.c $(LIBFT_SRC)/ft_memchr.c \
+					$(LIBFT_SRC)/ft_memcmp.c $(LIBFT_SRC)/ft_strnstr.c \
+					$(LIBFT_SRC)/ft_atoi.c $(LIBFT_SRC)/ft_calloc.c \
+					$(LIBFT_SRC)/ft_strdup.c $(LIBFT_SRC)/ft_substr.c \
+					$(LIBFT_SRC)/ft_strjoin.c $(LIBFT_SRC)/ft_strtrim.c \
+					$(LIBFT_SRC)/ft_split.c $(LIBFT_SRC)/ft_itoa.c \
+					$(LIBFT_SRC)/ft_strmapi.c $(LIBFT_SRC)/ft_striteri.c \
+					$(LIBFT_SRC)/ft_putchar_fd.c $(LIBFT_SRC)/ft_putstr_fd.c \
+					$(LIBFT_SRC)/ft_putendl_fd.c $(LIBFT_SRC)/ft_putnbr_fd.c \
+					$(LIBFT_SRC)/ft_lstnew.c $(LIBFT_SRC)/ft_lstadd_front.c \
+					$(LIBFT_SRC)/ft_lstsize.c $(LIBFT_SRC)/ft_lstlast.c \
+					$(LIBFT_SRC)/ft_lstadd_back.c $(LIBFT_SRC)/ft_lstdelone.c \
+					$(LIBFT_SRC)/ft_lstclear.c $(LIBFT_SRC)/ft_lstiter.c \
+					$(LIBFT_SRC)/ft_lstmap.c \
+					\
+					$(FT_PRINTF_SRC)/ft_printf.c $(FT_PRINTF_SRC)/init.c \
+					$(FT_PRINTF_SRC)/print_format_c.c $(FT_PRINTF_SRC)/check.c \
+					$(FT_PRINTF_SRC)/print_format_d.c \
+					$(FT_PRINTF_SRC)/print_format_i.c \
+					$(FT_PRINTF_SRC)/print_format_p.c \
+					$(FT_PRINTF_SRC)/print_format_s.c \
+					$(FT_PRINTF_SRC)/print_format_u.c \
+					$(FT_PRINTF_SRC)/print_format_x_low.c \
+					$(FT_PRINTF_SRC)/print_format_x_upp.c \
+					\
+					$(GET_NEXT_LINE_SRC)/get_next_line.c \
+					$(GET_NEXT_LINE_SRC)/get_next_line_utils.c
 
-OBJ_DIR			= obj/
+OBJS = 				$(SRCS:$(SRCS_DIR)/%.c=$(OBJS_DIR)/$(SRCS_DIR)/%.o)
 
-SRC_FILES		= ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c \
-ft_isprint.c ft_strlen.c ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c \
-ft_strlcpy.c ft_strlcat.c ft_toupper.c ft_tolower.c ft_strchr.c \
-ft_strrchr.c ft_strncmp.c ft_memchr.c ft_memcmp.c ft_strnstr.c ft_atoi.c \
-ft_calloc.c ft_strdup.c ft_substr.c ft_strjoin.c ft_strtrim.c ft_split.c \
-ft_itoa.c ft_strmapi.c ft_striteri.c ft_putchar_fd.c ft_putstr_fd.c \
-ft_putendl_fd.c ft_putnbr_fd.c ft_lstnew_bonus.c ft_lstadd_front_bonus.c \
-ft_lstsize_bonus.c ft_lstlast_bonus.c ft_lstadd_back_bonus.c \
-ft_lstdelone_bonus.c ft_lstclear_bonus.c ft_lstiter_bonus.c \
-ft_lstmap_bonus.c ft_check_address_pf.c ft_printf.c ft_putchar_pf.c \
-ft_puthexamaj_pf.c ft_puthexamin_pf.c ft_putint_pf.c ft_putstr_pf.c ft_putuint_pf.c \
-get_next_line_bonus.c get_next_line_utils_bonus.c
+# Rules and Dependencies
+all: 				$(NAME)
 
-OBJ_FILES		= $(SRC_FILES:%.c=$(OBJ_DIR)%.o)
+$(NAME):			$(OBJS)
+					$(AR) $(NAME) $(OBJS)
 
-#############################################################
-## RULES
-
-all: $(NAME)
-
-$(NAME): $(OBJ_FILES)
-	ar rcs $(NAME) $(OBJ_FILES)
-
-$(OBJ_DIR)%.o: $(SRC_DIR)%.c
-	@mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+$(OBJS_DIR)/$(SRCS_DIR)/%.o: $(SRCS_DIR)/%.c
+					@mkdir -p $(dir $@)
+					$(CC) -c $(CFLAGS) $(INCLUDES) $< -o $@
 
 clean:
-	rm -rf $(OBJ_DIR)
+					$(RM) $(OBJS_DIR)
 
-fclean: clean
-	rm -rf $(NAME)
+fclean: 			clean
+					$(RM) $(NAME)
 
-re: fclean all
+re: 				fclean all
 
-.PHONY: all clean fclean re
+.PHONY: 			all clean fclean re
+
+#END

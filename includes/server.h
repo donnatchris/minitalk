@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/04 18:00:36 by christophed       #+#    #+#             */
-/*   Updated: 2025/01/07 14:50:31 by chdonnat         ###   ########.fr       */
+/*   Created: 2025/01/08 13:19:30 by nifromon          #+#    #+#             */
+/*   Updated: 2025/01/09 10:41:17 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <signal.h>
-# include "../libft/includes/libft.h"
+# include "../libft/headers/libft_H/libft.h"
 
 // Structures
 typedef struct s_msg
@@ -26,6 +26,8 @@ typedef struct s_msg
 	char	*len_str;
 	int		pid;
 	int		len;
+	int		chrono_on;
+	int		time;
 }			t_msg;
 
 // Global variable
@@ -36,14 +38,14 @@ void	close_program(int signum);
 void	initialize_container(void);
 void	error(char *str);
 void	initialize_len(void);
-void    check_msg_len(int signum, siginfo_t *info, void *context);
+void	check_msg_len(int signum, siginfo_t *info, void *context);
 void	confirm_bit_reception(void);
-void    store_msg_len(char c);
-void    initialize_msg(void);
-void    receive_msg(int signum, siginfo_t *info, void *context);
-void    store_msg(char c);
+void	store_msg_len(char c);
+void	initialize_msg(void);
+void	receive_msg(int signum, siginfo_t *info, void *context);
+void	store_msg(char c);
 void	end_reception(void);
 int		is_number(char *str);
-
+void	confirm_message_reception(void);
 
 #endif

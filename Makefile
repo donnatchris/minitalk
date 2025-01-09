@@ -3,76 +3,85 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+         #
+#    By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/12/16 16:21:20 by christophed       #+#    #+#              #
-#    Updated: 2025/01/05 21:38:17 by christophed      ###   ########.fr        #
+#    Created: 2025/01/08 13:36:58 by nifromon          #+#    #+#              #
+#    Updated: 2025/01/09 09:36:52 by chdonnat         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-# Nom de l'exécutable
-SERVER_TARGET = server
-CLIENT_TARGET = client
-# BONUS_TARGET = NAME OF BONUS
+# Argument
+SERVER =			server
+CLIENT =			client
 
-# Répertoires
-SRC_SERVER_DIR = src_server
-SRC_CLIENT_DIR = src_client
-UTILS_DIR = utils
-OBJ_DIR = obj
-OBJ_DIR_SERVER = $(OBJ_DIR)/server
-OBJ_DIR_CLIENT = $(OBJ_DIR)/client
-INC_DIR = includes
-LIBFT_DIR = libft
-# BONUS_DIR = bonus
+# Compilation
+CC =				gcc
+CFLAGS =			-Wall -Werror -Wextra
+INCLUDES =			-I $(HEADER_DIR)/
 
-# Fichiers source et objets
-SERVER_SRCS = $(wildcard $(SRC_SERVER_DIR)/*.c) $(wildcard $(UTILS_DIR)/*.c)
-CLIENT_SRCS = $(wildcard $(SRC_CLIENT_DIR)/*.c) $(wildcard $(UTILS_DIR)/*.c)
+# Directories
+SERVER_DIR =		server_src
+CLIENT_DIR =		client_src
+HEADER_DIR =		includes
 
-SERVER_OBJS = $(patsubst %.c, $(OBJ_DIR_SERVER)/%.o, $(notdir $(SERVER_SRCS)))
-CLIENT_OBJS = $(patsubst %.c, $(OBJ_DIR_CLIENT)/%.o, $(notdir $(CLIENT_SRCS)))
+OBJ_DIR =			obj
+OBJ_SERVER_DIR =	$(OBJ_DIR)/server_obj
+OBJ_CLIENT_DIR =	$(OBJ_DIR)/client_obj
 
-# Options de compilation
-CFLAGS = -Wall -Wextra -Werror -I$(INC_DIR) -I$(LIBFT_DIR)/includes
+LIBFT_DIR =			libft
+LIBFT =				$(LIBFT_DIR)/libft.a
 
-# Spécifier le compilateur
-CC = gcc
+# Utils
+RM =				rm -rf
 
-# Options de l'éditeur de liens
-LDFLAGS = -L$(LIBFT_DIR) -lft
+# Sources and objects
+SERVER_SRC =		\
+					$(SERVER_DIR)/receiver.c $(SERVER_DIR)/main.c \
+					$(SERVER_DIR)/initializer.c $(SERVER_DIR)/server.c
 
-# Règles
-all: $(SERVER_TARGET) $(CLIENT_TARGET)
 
-$(OBJ_DIR_SERVER)/%.o: $(SRC_SERVER_DIR)/%.c
-	mkdir -p $(OBJ_DIR_SERVER)
-	$(CC) $(CFLAGS) -c $< -o $@
+OBJ_SERVER_SRC =	$(SERVER_SRC:$(SERVER_DIR)/%.c=$(OBJ_SERVER_DIR)/%.o)
 
-$(OBJ_DIR_CLIENT)/%.o: $(SRC_CLIENT_DIR)/%.c
-	mkdir -p $(OBJ_DIR_CLIENT)
-	$(CC) $(CFLAGS) -c $< -o $@
+CLIENT_SRC =		\
+					$(CLIENT_DIR)/client.c $(CLIENT_DIR)/main.c \
+					$(CLIENT_DIR)/transmitter.c
 
-$(OBJ_DIR_SERVER)/%.o: $(UTILS_DIR)/%.c
-	mkdir -p $(OBJ_DIR_SERVER)
-	$(CC) $(CFLAGS) -c $< -o $@
+OBJ_CLIENT_SRC =	$(CLIENT_SRC:$(CLIENT_DIR)/%.c=$(OBJ_CLIENT_DIR)/%.o)
 
-$(OBJ_DIR_CLIENT)/%.o: $(UTILS_DIR)/%.c
-	mkdir -p $(OBJ_DIR_CLIENT)
-	$(CC) $(CFLAGS) -c $< -o $@
+# Rules and dependencies
+all:				$(LIBFT) only_server only_client
 
-$(SERVER_TARGET): $(SERVER_OBJS)
-	$(CC) $(CFLAGS) $(SERVER_OBJS) -o $@ $(LDFLAGS)
+$(LIBFT):
+					make -C $(LIBFT_DIR) all
 
-$(CLIENT_TARGET): $(CLIENT_OBJS)
-	$(CC) $(CFLAGS) $(CLIENT_OBJS) -o $@ $(LDFLAGS)
-    
+only_server:		$(SERVER)
+
+$(SERVER):			$(LIBFT) $(OBJ_SERVER_SRC)
+					$(CC) $(CFLAGS) $(OBJ_SERVER_SRC) $(LIBFT) -o $(SERVER)
+
+$(OBJ_SERVER_DIR)/%.o: $(SERVER_DIR)/%.c
+					@mkdir -p $(OBJ_DIR)
+					@mkdir -p $(OBJ_SERVER_DIR)
+					$(CC) -c $(CFLAGS) $(INCLUDES) $< -o $@
+
+only_client:		$(CLIENT)
+
+$(CLIENT):			$(LIBFT) $(OBJ_CLIENT_SRC)
+					$(CC) $(CFLAGS) $(OBJ_CLIENT_SRC) $(LIBFT) -o $(CLIENT)
+
+$(OBJ_CLIENT_DIR)/%.o: $(CLIENT_DIR)/%.c
+					@mkdir -p $(OBJ_DIR)
+					@mkdir -p $(OBJ_CLIENT_DIR)
+					$(CC) -c $(CFLAGS) $(INCLUDES) $< -o $@
+
 clean:
-	rm -rf $(OBJ_DIR)
+					make -C $(LIBFT_DIR) clean
+					$(RM) $(OBJ_DIR)
 
-fclean: clean
-	rm -f $(SERVER_TARGET) $(CLIENT_TARGET)
+fclean:				clean
+					make -C $(LIBFT_DIR) fclean
+					$(RM) $(SERVER) $(CLIENT)
 
-re: fclean all
+re:					fclean all
 
-.PHONY: all clean fclean re
+.PHONY:				all only_server only_client clean fclean re
