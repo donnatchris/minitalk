@@ -6,7 +6,7 @@
 /*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 14:35:16 by nifromon          #+#    #+#             */
-/*   Updated: 2025/01/09 11:21:24 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/01/09 12:00:12 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,20 +50,18 @@ int	check_pid(char *str)
 		error("Invalid PID, only positive numbers are allowed.");
 	if (kill(pid, 0) == -1)
 		error("Invalid PID, the process does not exist.");
-	ft_printf("%d\n", pid);
 	return (pid);
 }
 
-// Function confirm that the server has answered after receiving the whole message
-void	confirm_message(int signum)
-{
-	(void) signum;
-	ft_printf("\x1b[32mMessage sent. \x1b[0m");
-	ft_printf("\x1b[32mServer has confirmed by sending a signal.\x1b[0m\n");
-	exit(0);
-}
-// Function to confirm that the server has received a bit
+// Function to confirm that the server has received a bit (SIGUSR2)
+// or the entire message (SIGUSR1)
 void	confirm(int signum)
 {
-	(void) signum;
+	g_confirmed = 1;
+	if (signum == SIGUSR1)
+	{
+		ft_printf("\x1b[32mMessage sent. \x1b[0m");
+		ft_printf("\x1b[32mServer has confirmed by sending a signal.\x1b[0m\n");
+		exit(0);
+	}
 }

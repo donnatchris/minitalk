@@ -6,7 +6,7 @@
 /*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 14:56:41 by nifromon          #+#    #+#             */
-/*   Updated: 2025/01/09 10:18:56 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/01/09 12:08:55 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	initialize_len(void)
 	sigaddset(&act.sa_mask, SIGUSR2);
 	act.sa_flags = SA_SIGINFO;
 	act.sa_sigaction = check_msg_len;
-	ft_printf("Receiver initialized. Waiting for msg_len...\n");
+	ft_printf("Receiver initialized. Waiting for message lenght...\n");
 	if (sigaction(SIGUSR1, &act, NULL) == -1)
 		error("sigaction error");
 	if (sigaction(SIGUSR2, &act, NULL) == -1)
@@ -61,7 +61,7 @@ void	initialize_msg(void)
 	g_container->msg = (char *) malloc(sizeof(char) * (g_container->len + 1));
 	if (!g_container->msg)
 		error("memory allocation failed");
-	ft_printf("Receiver initialized. Waiting for msg...\n");
+	ft_printf("Message lenght received. Waiting for message...\n");
 	if (sigaction(SIGUSR1, &act, NULL) == -1)
 		error("sigaction error");
 	if (sigaction(SIGUSR2, &act, NULL) == -1)
