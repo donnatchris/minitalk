@@ -1,7 +1,8 @@
-PROJECT MINITALK FOR 42
+# PROJECT MINITALK FOR 42
 By chdonnat (Christophe Donnat from 42 Perpignan, France)
 
-AIM OF THE PROJECT:
+## AIM OF THE PROJECT:
+
 You are required to create a communication program in the form of a client and a server.
 The server must be launched first and, after starting, should display its PID.
 The client takes two parameters:
@@ -18,7 +19,7 @@ The list of possible bonus features includes:
 - The server confirms the reception of each message by sending a signal to the client.
 - Support for Unicode characters.
 
-ARCHITECTURE:
+## ARCHITECTURE:
 - mandatory/ directory for the mandatory part:
     - include/ directory for header files
     - src/ directory for the src files:
@@ -33,7 +34,7 @@ ARCHITECTURE:
 - libft/ directory with my own library (standard functions, ft_printf, get_next_line)
 - readme.md for explanations and main commands of the project
 
-SOME COMMANDS YOU CAN USE:
+## SOME COMMANDS YOU CAN USE:
 
 compile both server and client without bonus:
 
@@ -71,19 +72,19 @@ send a unique signal to the server so that you can see what is happening
 	 kill -SIGUSR1 <server PID>
 
 
-DOCUMENTATION:
+## DOCUMENTATION:
 
-**process**
+### process
 
 	A process is a running instance of a program that is executed by the operating system.
 	It includes the program's code, its current activity (such as variables and data), and system resources like memory and CPU time.
 	Each process is identified by a unique Process ID (PID).
 
-process id (PID)
+### process id (PID)
 	PID (Process ID) is a unique identifier (a number) assigned by the operating system to each running process.
 	It is used to manage and track processes within the system.
 
-parent and child processes
+### parent and child processes
 	A parent process is a process that creates one or more child processes.
 	It is the process that initiates another process by using system calls like fork().
 	The parent process can manage or communicate with its child processes, and the child processes inherit certain attributes from the parent,
