@@ -265,9 +265,7 @@ the signal handler remains valid unless overridden by another signal() or sigact
 If you call signal(signum, ...) again within the program, it will overwrite the previous handler.
 You can restore the default behavior using signal(signum, SIG_DFL).
 
- **Limitations:** 
- 
-While signal is simple to use, it has limitations, such as platform-dependent behavior and potential issues with reentrancy.
+ **Limitations:** While signal is simple to use, it has limitations, such as platform-dependent behavior and potential issues with reentrancy.
 For better portability and finer control over signal handling, the modern alternative sigaction is recommended.
 Some signals, like SIGKILL and SIGSTOP, cannot be caught or ignored, as they are managed exclusively by the operating system.
 
@@ -288,19 +286,24 @@ sigaction() returns 0 on success and -1 on error, and sets errno to indicate the
 The sigaction structure in C is used to define how a program handles specific signals.
 The structure includes several members:
 - sa_handler:
+
 	A pointer to a function that handles the signal,
 	(or a set to SIG_IGN to ignore the signal or SIG_DFL to restore the default behavior for the signal).
 	This function takes an integer argument representing the signal number.
 - sa_sigaction:
+
 	A pointer to an advanced signal handling function that can provide additional information about the signal.
 	This is used when the SA_SIGINFO flag is set in sa_flags.
 - sa_mask:
+
 	A sigset_t variable that specifies a set of signals to be blocked while the signal handler is executing.
 	This helps prevent other signals from interrupting the handler.
 - sa_flags:
+
 	An integer that specifies options for signal handling,
 	such as SA_RESTART to restart interrupted system calls or SA_SIGINFO to use the sa_sigaction handler.
 - sa_restorer:
+
 	Reserved for future use and generally ignored.
  
 By using the sigaction structure, you can manage how your program responds to different signals,
