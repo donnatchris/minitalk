@@ -172,7 +172,7 @@ SIGCONT: Continue signal, associated with number 18.
 SIGSEGV: Segmentation fault signal, associated with number 11.
 	It is generated when a process tries to access an invalid memory location, often indicating a bug in the program.
 
-## SIGUSR1 and SIGUSR2
+### SIGUSR1 and SIGUSR2
 SIGUSR1 and SIGUSR2 are user-defined signals in Unix-like systems that can be used for custom actions within a program.
 Since they have no default behavior, developers can define how the program should respond to these signals, such as
 triggering logging, reloading configurations, or toggling debugging modes.
@@ -181,10 +181,10 @@ Programs can handle SIGUSR1 and SIGUSR2 signals by setting up custom signal hand
 When received, the program executes the corresponding handler,
 such as (for example) logging an event for SIGUSR1 or running a diagnostic routine for SIGUSR2.
 
-## getpid()
-prototype:
-	#include <unistd.h>
-	pid_t getpid(void);
+### getpid()
+#### prototype:
+#include <unistd.h>
+pid_t getpid(void);
 The getpid() function in C retrieves the Process ID (PID) of the calling process,
 which is a unique identifier assigned by the operating system.
 It returns a value of type pid_t and is commonly used for process management, debugging, and inter-process communication
@@ -194,24 +194,24 @@ The function is often paired with getppid() to determine the parent process's PI
 or used after fork() to differentiate between parent and child processes.
 The PID remains unique while the process is active, but it can be reused after the process terminates.
 
-kill()
-	prototype:
-		#include <signal.h>
-		int kill(pid_t pid, int sig);
-	The kill() function in C is used to send a signal to a specific process or a group of processes.
-	It takes two parameters: the pid (process ID) of the target process and the signal to be sent (e.g., SIGTERM, SIGKILL, SIGINT).
-	The function returns 0 on success or -1 on error.
-	It can be used to control processes, such as terminating them or sending various signals like interrupting or stopping them.
-	kill() is versatile and not limited to just terminating processes; it allows sending any signal defined in the system.
+### kill()
+#### prototype:
+#include <signal.h>
+int kill(pid_t pid, int sig);
+The kill() function in C is used to send a signal to a specific process or a group of processes.
+It takes two parameters: the pid (process ID) of the target process and the signal to be sent (e.g., SIGTERM, SIGKILL, SIGINT).
+The function returns 0 on success or -1 on error.
+It can be used to control processes, such as terminating them or sending various signals like interrupting or stopping them.
+kill() is versatile and not limited to just terminating processes; it allows sending any signal defined in the system.
 
-pause()
-	prototype:
-		#include <signal.h>
-		int pause(void);
-	The pause() function in C suspends the execution of a program until a signal is received.
-	It doesn't take any parameters and returns -1 when a signal interrupts the function call, setting errno to EINTR.
-	The function is commonly used in programs that need to wait for a signal (like SIGINT) before resuming execution.
-	Once the signal is received, the program resumes execution after handling the signal.
+### pause()
+#### prototype:
+#include <signal.h>
+int pause(void);
+The pause() function in C suspends the execution of a program until a signal is received.
+It doesn't take any parameters and returns -1 when a signal interrupts the function call, setting errno to EINTR.
+The function is commonly used in programs that need to wait for a signal (like SIGINT) before resuming execution.
+Once the signal is received, the program resumes execution after handling the signal.
 
 sleep()
 	prototype:
