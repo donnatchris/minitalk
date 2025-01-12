@@ -182,11 +182,8 @@ When received, the program executes the corresponding handler,
 such as (for example) logging an event for SIGUSR1 or running a diagnostic routine for SIGUSR2.
 
 ### getpid()
-#### prototype:
 #include <unistd.h>
-
 pid_t getpid(void);
-
 The getpid() function in C retrieves the Process ID (PID) of the calling process,
 which is a unique identifier assigned by the operating system.
 It returns a value of type pid_t and is commonly used for process management, debugging, and inter-process communication
