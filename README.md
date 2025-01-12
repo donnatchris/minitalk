@@ -35,29 +35,41 @@ ARCHITECTURE:
 
 SOME COMMANDS YOU CAN USE:
 
-compiles both server and client without bonus
-'make'
+compile both server and client without bonus:
 
 	make
 
+compile only the server:
  
-'make server_only'
-	compiles only the server
-'make client'
-	compiles only the client
-'make bonus'
-	compiles both server and cleint with bonus
-'./server'
-	launches the server, which remains waiting until CTRL + C to stop it
+	make server_only
+
+
+compile only the client:
+
+	make client_only
+
+compile both server and cleint with bonus:
+
+ 	'make bonus'
+  
+launch the server, which remains waiting until CTRL + C to stop it
 	the server must be launched before the client
 	when the client sends a message to the server, the server writes the message sent
 	(and sends a confirmation to the client for the bonus part)
-'./client <server PID> "<Your message>"'
+
+	./server
+
+launch the client
 	the client sends <Your message> to the server which has the <server PID> PID
 	(and then wait for a response from the server for the bonus part)
-'kill -SIGUSR1 <server PID>'
-	sends a unique signal to the server so that you can see what is happening
+
+	./client <server PID> "<Your message>"
+
+send a unique signal to the server so that you can see what is happening
 	when the server cannot receive a complete message
+
+	 kill -SIGUSR1 <server PID>
+
 
 DOCUMENTATION:
 
