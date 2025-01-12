@@ -35,9 +35,8 @@ ARCHITECTURE:
 
 SOME COMMANDS YOU CAN USE:
 
-'make'
-
-	compiles both server and client without bonus
+make
+	'compiles both server and client without bonus'
  
 'make server_only'
 	compiles only the server
