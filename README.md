@@ -51,7 +51,7 @@ compile only the client:
 
 compile both server and cleint with bonus:
 
- 	'make bonus'
+ 	make bonus
   
 launch the server, which remains waiting until CTRL + C to stop it
 	the server must be launched before the client
@@ -172,27 +172,27 @@ SIGCONT: Continue signal, associated with number 18.
 SIGSEGV: Segmentation fault signal, associated with number 11.
 	It is generated when a process tries to access an invalid memory location, often indicating a bug in the program.
 
-SIGUSR1 and SIGUSR2
-	SIGUSR1 and SIGUSR2 are user-defined signals in Unix-like systems that can be used for custom actions within a program.
-	Since they have no default behavior, developers can define how the program should respond to these signals, such as
-	triggering logging, reloading configurations, or toggling debugging modes.
-	These signals are useful for inter-process communication and controlling a program's behavior during runtime without terminating it.
-	Programs can handle SIGUSR1 and SIGUSR2 signals by setting up custom signal handlers using functions like signal() or sigaction().
-	When received, the program executes the corresponding handler,
-	such as (for example) logging an event for SIGUSR1 or running a diagnostic routine for SIGUSR2.
+## SIGUSR1 and SIGUSR2
+SIGUSR1 and SIGUSR2 are user-defined signals in Unix-like systems that can be used for custom actions within a program.
+Since they have no default behavior, developers can define how the program should respond to these signals, such as
+triggering logging, reloading configurations, or toggling debugging modes.
+These signals are useful for inter-process communication and controlling a program's behavior during runtime without terminating it.
+Programs can handle SIGUSR1 and SIGUSR2 signals by setting up custom signal handlers using functions like signal() or sigaction().
+When received, the program executes the corresponding handler,
+such as (for example) logging an event for SIGUSR1 or running a diagnostic routine for SIGUSR2.
 
-getpid()
-	prototype:
-		#include <unistd.h>
-		pid_t getpid(void);
-	The getpid() function in C retrieves the Process ID (PID) of the calling process,
-	which is a unique identifier assigned by the operating system.
-	It returns a value of type pid_t and is commonly used for process management, debugging, and inter-process communication
-	(e.g., sending signals using kill()).
-	In multithreaded programs, all threads share the same PID.
-	The function is often paired with getppid() to determine the parent process's PID
-	or used after fork() to differentiate between parent and child processes.
-	The PID remains unique while the process is active, but it can be reused after the process terminates.
+## getpid()
+prototype:
+	#include <unistd.h>
+	pid_t getpid(void);
+The getpid() function in C retrieves the Process ID (PID) of the calling process,
+which is a unique identifier assigned by the operating system.
+It returns a value of type pid_t and is commonly used for process management, debugging, and inter-process communication
+(e.g., sending signals using kill()).
+In multithreaded programs, all threads share the same PID.
+The function is often paired with getppid() to determine the parent process's PID
+or used after fork() to differentiate between parent and child processes.
+The PID remains unique while the process is active, but it can be reused after the process terminates.
 
 kill()
 	prototype:
