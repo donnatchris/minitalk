@@ -6,7 +6,7 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 14:35:16 by nifromon          #+#    #+#             */
-/*   Updated: 2025/01/10 00:38:11 by christophed      ###   ########.fr       */
+/*   Updated: 2025/01/12 10:32:37 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	check_pid(char *str)
 // or the entire message (SIGUSR1)
 void	confirm(int signum, siginfo_t *info, void *context)
 {
-	(void)	context;
+	(void) context;
 	if (g_client->pid == -100)
 		g_client->pid = info->si_pid;
 	else if (g_client->pid != info->si_pid)

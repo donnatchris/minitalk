@@ -6,7 +6,7 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 14:56:41 by nifromon          #+#    #+#             */
-/*   Updated: 2025/01/10 00:38:19 by christophed      ###   ########.fr       */
+/*   Updated: 2025/01/12 09:33:42 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ void	initialize_container(void)
 	}
 	g_container->pid = -100;
 	g_container->len = 0;
-	g_container->chrono_on = 0;
-	g_container->time = 0;
 	g_container->check_msg_len = 0;
 	g_container->store_msg_len = 0;
 	g_container->receive_msg = 0;

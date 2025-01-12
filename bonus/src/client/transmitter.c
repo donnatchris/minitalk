@@ -6,7 +6,7 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 14:36:21 by nifromon          #+#    #+#             */
-/*   Updated: 2025/01/10 00:38:07 by christophed      ###   ########.fr       */
+/*   Updated: 2025/01/12 10:32:20 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	send_char(int server_pid, char c)
 			usleep(100);
 			timer++;
 			if (timer >= 1000)
-				error("Server did not confirm. Communication seems to have failed.");
+				error("Server did not confirm. Communication have failed.");
 		}
 	}
 }

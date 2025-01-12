@@ -6,7 +6,7 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 13:18:15 by nifromon          #+#    #+#             */
-/*   Updated: 2025/01/10 00:24:32 by christophed      ###   ########.fr       */
+/*   Updated: 2025/01/12 10:30:54 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ extern t_client	*g_client;
 void	error(char *str);
 int		is_number(char *str);
 int		check_pid(char *str);
-void    confirm(int ignum, siginfo_t *info, void *context);
+void	confirm(int ignum, siginfo_t *info, void *context);
 void	initialize_confirmation(void);
 // transmitter.c
 // functions to send messages by using 2 signals

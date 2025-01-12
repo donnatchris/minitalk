@@ -6,7 +6,7 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 14:36:21 by nifromon          #+#    #+#             */
-/*   Updated: 2025/01/10 00:38:07 by christophed      ###   ########.fr       */
+/*   Updated: 2025/01/12 09:42:03 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	send_message(int server_pid, char *str)
 void	send_char(int server_pid, char c)
 {
 	int	i;
-	int	timer;
 
 	i = 0;
 	while (i < 8)
@@ -37,15 +36,7 @@ void	send_char(int server_pid, char c)
 		else
 			kill(server_pid, SIGUSR1);
 		i++;
-		g_client->confirmed = 0;
-		timer = 0;
-		while (!g_client->confirmed)
-		{
-			usleep(100);
-			timer++;
-			if (timer >= 1000)
-				error("Server did not confirm. Communication seems to have failed.");
-		}
+		usleep(150);
 	}
 }
 

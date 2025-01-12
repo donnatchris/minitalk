@@ -4,5 +4,6 @@
 		"minitalk.h": "c",
 		"client.h": "c",
 		"server.h": "c"
-	}
+	},
+	"makefile.configureOnOpen": false
 }

@@ -6,7 +6,7 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 14:52:22 by nifromon          #+#    #+#             */
-/*   Updated: 2025/01/10 00:38:30 by christophed      ###   ########.fr       */
+/*   Updated: 2025/01/12 09:42:58 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,18 +62,4 @@ int	is_number(char *str)
 		i++;
 	}
 	return (1);
-}
-
-// Function to confirm the reception of each bit to the client
-void	confirm_bit_reception(void)
-{
-	usleep(300);
-	kill(g_container->pid, SIGUSR2);
-}
-
-// Function to confirm the reception of the entire message
-void	confirm_message_reception(void)
-{
-	usleep(300);
-	kill(g_container->pid, SIGUSR1);
 }

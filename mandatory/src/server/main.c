@@ -6,7 +6,7 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 14:37:15 by nifromon          #+#    #+#             */
-/*   Updated: 2025/01/10 00:38:22 by christophed      ###   ########.fr       */
+/*   Updated: 2025/01/12 09:38:30 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,6 @@ int	main(void)
 	initialize_container();
 	initialize_len();
 	while (1)
-	{
-		if (g_container->chrono_on)
-		{
-			usleep(100);
-			g_container->time++;
-			if (g_container->time >= 10000)
-				error("timeout");
-		}
-	}
+		;
 	return (0);
 }

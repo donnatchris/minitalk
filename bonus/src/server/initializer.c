@@ -6,7 +6,7 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 14:56:41 by nifromon          #+#    #+#             */
-/*   Updated: 2025/01/10 00:38:19 by christophed      ###   ########.fr       */
+/*   Updated: 2025/01/12 10:31:52 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ void	initialize_len(void)
 	struct sigaction	act;
 
 	sigemptyset(&act.sa_mask);
-	sigaddset(&act.sa_mask, SIGUSR1);
-	sigaddset(&act.sa_mask, SIGUSR2);
 	act.sa_flags = SA_SIGINFO;
 	act.sa_sigaction = check_msg_len;
 	ft_printf("Receiver initialized. Waiting for message lenght...\n");
@@ -55,8 +53,6 @@ void	initialize_msg(void)
 	struct sigaction	act;
 
 	sigemptyset(&act.sa_mask);
-	sigaddset(&act.sa_mask, SIGUSR1);
-	sigaddset(&act.sa_mask, SIGUSR2);
 	act.sa_flags = SA_SIGINFO;
 	act.sa_sigaction = receive_msg;
 	g_container->msg = (char *) malloc(sizeof(char) * (g_container->len + 1));
