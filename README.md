@@ -1,5 +1,7 @@
 # PROJECT MINITALK FOR 42
+<span style="color: red;">Texte rouge</span>
 By chdonnat (Christophe Donnat from 42 Perpignan, France)
+<span style="color: red;">Texte rouge</span>
 
 ## AIM OF THE PROJECT:
 You are required to create a communication program in the form of a client and a server. 
