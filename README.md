@@ -34,8 +34,11 @@ ARCHITECTURE:
 - readme.md for explanations and main commands of the project
 
 SOME COMMANDS YOU CAN USE:
+
 'make'
+
 	compiles both server and client without bonus
+ 
 'make server_only'
 	compiles only the server
 'make client'
