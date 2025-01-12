@@ -102,23 +102,23 @@ In summary, the first process launched at startup is either init (in older syste
 
 ### process stop
 When a process stops (or terminates), several things happen:
-#### exit status:
-The process ends and returns an exit status to the operating system,
-typically indicating whether it finished successfully or encountered an error.
-This status can be checked by the parent process to determine how the child process ended.
-#### process termination:
-The operating system releases the resources (like memory, file descriptors, etc.) that were allocated to the process.
-The process is removed from the process table, which is a data structure that keeps track of all running processes.
-#### zombie state:
-If a process has terminated but its parent has not yet read its exit status (using a system call like wait()),
-the terminated process enters a "zombie" state.
-It still occupies a slot in the process table, but is effectively dead, awaiting cleanup by the parent.
-The parent process must call wait() to collect the exit status and remove the zombie process.
-#### parent-child relationship:
-Once the process terminates, the parent process may take specific actions,
-such as cleaning up after the child process or launching new processes.
-If the parent doesn't handle the termination of the child,
-the operating system may assign a new parent process (often init or systemd) to clean up.
+- exit status:
+	The process ends and returns an exit status to the operating system,
+	typically indicating whether it finished successfully or encountered an error.
+	This status can be checked by the parent process to determine how the child process ended.
+- process termination:
+	The operating system releases the resources (like memory, file descriptors, etc.) that were allocated to the process.
+	The process is removed from the process table, which is a data structure that keeps track of all running processes.
+- zombie state:
+	If a process has terminated but its parent has not yet read its exit status (using a system call like wait()),
+	the terminated process enters a "zombie" state.
+	It still occupies a slot in the process table, but is effectively dead, awaiting cleanup by the parent.
+	The parent process must call wait() to collect the exit status and remove the zombie process.
+- parent-child relationship:
+	Once the process terminates, the parent process may take specific actions,
+	such as cleaning up after the child process or launching new processes.
+	If the parent doesn't handle the termination of the child,
+	the operating system may assign a new parent process (often init or systemd) to clean up.
 
 ### process state
 In general, a process on a UNIX or Linux system can be in one of the following states:
