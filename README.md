@@ -2,19 +2,19 @@
 By chdonnat (Christophe Donnat from 42 Perpignan, France)
 
 ## AIM OF THE PROJECT:
-
 You are required to create a communication program in the form of a client and a server.
 The server must be launched first and, after starting, should display its PID.
 The client takes two parameters:
 - The PID of the server.
 - A string to transmit.
+
 The client must communicate the provided string to the server.
 Once the server has received the entire string, it must display it.
 The server should display the string quickly. If you feel the process is too slow, it probably is.
 The server must be able to receive strings from multiple clients consecutively without needing to be restarted.
 Communication between your programs must be performed exclusively using UNIX signals.
 You may only use the two signals: SIGUSR1 and SIGUSR2.
-BONUS
+### BONUS
 The list of possible bonus features includes:
 - The server confirms the reception of each message by sending a signal to the client.
 - Support for Unicode characters.
