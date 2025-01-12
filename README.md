@@ -2,17 +2,17 @@
 By chdonnat (Christophe Donnat from 42 Perpignan, France)
 
 ## AIM OF THE PROJECT:
-You are required to create a communication program in the form of a client and a server.
-The server must be launched first and, after starting, should display its PID.
+You are required to create a communication program in the form of a client and a server. 
+The server must be launched first and, after starting, should display its PID. 
 The client takes two parameters:
 - The PID of the server.
 - A string to transmit.
 
-The client must communicate the provided string to the server.
-Once the server has received the entire string, it must display it.
-The server should display the string quickly. If you feel the process is too slow, it probably is.
-The server must be able to receive strings from multiple clients consecutively without needing to be restarted.
-Communication between your programs must be performed exclusively using UNIX signals.
+The client must communicate the provided string to the server. 
+Once the server has received the entire string, it must display it. 
+The server should display the string quickly. If you feel the process is too slow, it probably is. 
+The server must be able to receive strings from multiple clients consecutively without needing to be restarted. 
+Communication between your programs must be performed exclusively using UNIX signals. 
 You may only use the two signals: SIGUSR1 and SIGUSR2.
 ### BONUS
 The list of possible bonus features includes:
@@ -53,22 +53,22 @@ compile both server and cleint with bonus:
 
  	make bonus
   
-launch the server, which remains waiting until CTRL + C to stop it
+launch the server, which remains waiting until CTRL + C to stop it:
 
-the server must be launched before the client
-when the client sends a message to the server, the server writes the message sent
+the server must be launched before the client 
+when the client sends a message to the server, the server writes the message sent 
 (and sends a confirmation to the client for the bonus part)
 
 	./server
 
-launch the client
+launch the client:
 
-the client sends <Your message> to the server which has the <server PID> PID
+the client sends <Your message> to the server which has the <server PID> PID 
 (and then wait for a response from the server for the bonus part)
 
 	./client <server PID> <"Your message">
 
-send a unique signal to the server so that you can see what is happenin when the server cannot receive a complete message
+send a unique signal to the server so that you can see what is happenin when the server cannot receive a complete message:
 
 	 kill -SIGUSR1 <server PID>
 
@@ -76,13 +76,13 @@ send a unique signal to the server so that you can see what is happenin when the
 ## DOCUMENTATION:
 
 ### process
-A process is a running instance of a program that is executed by the operating system.
-It includes the program's code, its current activity (such as variables and data), and system resources like memory and CPU time.
-Each process is identified by a unique Process ID (PID).
+A process is a running instance of a program that is executed by the operating system. 
+It includes the program's code, its current activity (such as variables and data), and system resources like memory and CPU time. 
+Each process is identified by a unique Process ID (PID). 
 
 ### process id (PID)
-PID (Process ID) is a unique identifier (a number) assigned by the operating system to each running process.
-It is used to manage and track processes within the system.
+PID (Process ID) is a unique identifier (a number) assigned by the operating system to each running process. 
+It is used to manage and track processes within the system. 
 
 ### parent and child processes
 A parent process is a process that creates one or more child processes.
@@ -118,12 +118,11 @@ When a process stops (or terminates), several things happen:
 	the terminated process enters a "zombie" state.
 	It still occupies a slot in the process table, but is effectively dead, awaiting cleanup by the parent.
 	The parent process must call wait() to collect the exit status and remove the zombie process.
-- parent-child relationship:
-  
-	Once the process terminates, the parent process may take specific actions,
-	such as cleaning up after the child process or launching new processes.
-	If the parent doesn't handle the termination of the child,
-	the operating system may assign a new parent process (often init or systemd) to clean up.
+#### parent-child relationship:
+Once the process terminates, the parent process may take specific actions, 
+such as cleaning up after the child process or launching new processes. 
+If the parent doesn't handle the termination of the child, 
+the operating system may assign a new parent process (often init or systemd) to clean up.
 
 ### process state
 In general, a process on a UNIX or Linux system can be in one of the following states:
