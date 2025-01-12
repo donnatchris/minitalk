@@ -75,103 +75,102 @@ send a unique signal to the server so that you can see what is happening
 ## DOCUMENTATION:
 
 ### process
-
-	A process is a running instance of a program that is executed by the operating system.
-	It includes the program's code, its current activity (such as variables and data), and system resources like memory and CPU time.
-	Each process is identified by a unique Process ID (PID).
+A process is a running instance of a program that is executed by the operating system.
+It includes the program's code, its current activity (such as variables and data), and system resources like memory and CPU time.
+Each process is identified by a unique Process ID (PID).
 
 ### process id (PID)
-	PID (Process ID) is a unique identifier (a number) assigned by the operating system to each running process.
-	It is used to manage and track processes within the system.
+PID (Process ID) is a unique identifier (a number) assigned by the operating system to each running process.
+It is used to manage and track processes within the system.
 
 ### parent and child processes
-	A parent process is a process that creates one or more child processes.
-	It is the process that initiates another process by using system calls like fork().
-	The parent process can manage or communicate with its child processes, and the child processes inherit certain attributes from the parent,
-	such as the environment and open files.
-	For example, when you launch a program from a terminal, the terminal is the parent process and the program is its child process.
-	That child process can become the parent of another process if it launches another process by itself.
+A parent process is a process that creates one or more child processes.
+It is the process that initiates another process by using system calls like fork().
+The parent process can manage or communicate with its child processes, and the child processes inherit certain attributes from the parent,
+such as the environment and open files.
+For example, when you launch a program from a terminal, the terminal is the parent process and the program is its child process.
+That child process can become the parent of another process if it launches another process by itself.
 
-init and systemd
-	The first process launched during the system startup on UNIX or Linux is usually init (in older systems) or systemd (in modern systems).
-	init is the parent process of all other processes on a UNIX or Linux system,
-	and it is the first process executed by the kernel after hardware initialization and root filesystem mounting.
-	In modern systems, systemd has replaced init and is also the first process executed after the kernel starts, with PID 1.
-	Both processes serve as system managers, responsible for initializing system services, managing processes, activating devices,
-	managing users, and other essential tasks to keep the system running.
-	In summary, the first process launched at startup is either init (in older systems) or systemd (in modern systems), and its PID is always 1.
+### init and systemd
+The first process launched during the system startup on UNIX or Linux is usually init (in older systems) or systemd (in modern systems).
+init is the parent process of all other processes on a UNIX or Linux system,
+and it is the first process executed by the kernel after hardware initialization and root filesystem mounting.
+In modern systems, systemd has replaced init and is also the first process executed after the kernel starts, with PID 1.
+Both processes serve as system managers, responsible for initializing system services, managing processes, activating devices,
+managing users, and other essential tasks to keep the system running.
+In summary, the first process launched at startup is either init (in older systems) or systemd (in modern systems), and its PID is always 1.
 
-process stop
-	When a process stops (or terminates), several things happen:
-	exit status:
-		The process ends and returns an exit status to the operating system,
-		typically indicating whether it finished successfully or encountered an error.
-		This status can be checked by the parent process to determine how the child process ended.
-	process termination:
-		The operating system releases the resources (like memory, file descriptors, etc.) that were allocated to the process.
-		The process is removed from the process table, which is a data structure that keeps track of all running processes.
-	zombie state:
-		If a process has terminated but its parent has not yet read its exit status (using a system call like wait()),
-		the terminated process enters a "zombie" state.
-		It still occupies a slot in the process table, but is effectively dead, awaiting cleanup by the parent.
-		The parent process must call wait() to collect the exit status and remove the zombie process.
-	parent-child relationship:
-		Once the process terminates, the parent process may take specific actions,
-		such as cleaning up after the child process or launching new processes.
-		If the parent doesn't handle the termination of the child,
-		the operating system may assign a new parent process (often init or systemd) to clean up.
+### process stop
+When a process stops (or terminates), several things happen:
+exit status:
+	The process ends and returns an exit status to the operating system,
+	typically indicating whether it finished successfully or encountered an error.
+	This status can be checked by the parent process to determine how the child process ended.
+process termination:
+	The operating system releases the resources (like memory, file descriptors, etc.) that were allocated to the process.
+	The process is removed from the process table, which is a data structure that keeps track of all running processes.
+zombie state:
+	If a process has terminated but its parent has not yet read its exit status (using a system call like wait()),
+	the terminated process enters a "zombie" state.
+	It still occupies a slot in the process table, but is effectively dead, awaiting cleanup by the parent.
+	The parent process must call wait() to collect the exit status and remove the zombie process.
+parent-child relationship:
+	Once the process terminates, the parent process may take specific actions,
+	such as cleaning up after the child process or launching new processes.
+	If the parent doesn't handle the termination of the child,
+	the operating system may assign a new parent process (often init or systemd) to clean up.
 
-process state
-	In general, a process on a UNIX or Linux system can be in one of the following states:
-	Running (R):
-		The process is currently running or ready to run.
-		It is using the CPU or waiting for its turn to use the CPU.
-	Sleeping (S):
-		The process is waiting for an event or a resource.
-		It can be in an interruptible sleep, where it can be awakened by a signal or an event,
-		or in an uninterruptible sleep, where it cannot be interrupted.
-	Stopped (T): 
-		The process has been stopped, usually by a signal such as SIGSTOP or SIGTSTP.
-		It can be restarted by a signal such as SIGCONT.
-	Zombie (Z):
-		The process has finished execution, but its entry in the process table has not yet been removed.
-		This occurs when the parent process has not yet read the exit status of the child process.
-	Dead (D):
-		The process is in an uninterruptible sleep state, usually waiting for an I/O operation.
-		This state is rarely observed and is often related to hardware issues or device lockups.
+### process state
+In general, a process on a UNIX or Linux system can be in one of the following states:
+Running (R):
+	The process is currently running or ready to run.
+	It is using the CPU or waiting for its turn to use the CPU.
+Sleeping (S):
+	The process is waiting for an event or a resource.
+	It can be in an interruptible sleep, where it can be awakened by a signal or an event,
+	or in an uninterruptible sleep, where it cannot be interrupted.
+Stopped (T): 
+	The process has been stopped, usually by a signal such as SIGSTOP or SIGTSTP.
+	It can be restarted by a signal such as SIGCONT.
+Zombie (Z):
+	The process has finished execution, but its entry in the process table has not yet been removed.
+	This occurs when the parent process has not yet read the exit status of the child process.
+Dead (D):
+	The process is in an uninterruptible sleep state, usually waiting for an I/O operation.
+	This state is rarely observed and is often related to hardware issues or device lockups.
 
-signal
-	A signal in computing is a mechanism used to notify a process about an event or interrupt its execution.
-	It is a form of inter-process communication in UNIX-like systems.
-	Signals can be generated by the kernel or other processes to notify a process of events
-	such as errors, the need to terminate, or the occurrence of certain conditions.
-	Common signals include SIGINT (interrupt), SIGKILL (force termination), and SIGTERM (graceful termination).
-	Processes can handle signals by either performing a default action or executing a custom signal handler.
+### signal
+A signal in computing is a mechanism used to notify a process about an event or interrupt its execution.
+It is a form of inter-process communication in UNIX-like systems.
+Signals can be generated by the kernel or other processes to notify a process of events
+such as errors, the need to terminate, or the occurrence of certain conditions.
+Common signals include SIGINT (interrupt), SIGKILL (force termination), and SIGTERM (graceful termination).
+Processes can handle signals by either performing a default action or executing a custom signal handler.
 
-common signals
-	Here’s a list of common signals in UNIX-like systems, along with their associated numbers.
-	In the context of the minitalk project, the only signal allowed are SIGUSR1 and SIGUSR2
-	SIGINT: Interrupt signal, associated with number 2.
-		It interrupts a running process. It is typically sent when a user presses Ctrl+C in the terminal.
-	SIGKILL: Force termination signal, associated with number 9.
-		It immediately kills the process and cannot be caught or ignored.
-	SIGTERM: Termination signal, associated with number 15.
-		It is a polite request for the process to terminate, which can be handled or ignored by the process.
-		SIGTERM is often expected to allow for a more orderly shutdown than SIGINT.
-	SIGQUIT: Quit signal, associated with number 3.
-		Similar to SIGINT, but it also causes the process to create a core dump.
-	SIGHUP: Hang-up signal, associated with number 1.
-		Often sent to a process when its controlling terminal is closed, typically used to indicate that a process should reload its configuration.
-	SIGUSR1: User-defined signal 1, associated with number 10.
-		It can be used by processes for custom actions.
-	SIGUSR2: User-defined signal 2, associated with number 12.
-		Like SIGUSR1, it is for custom purposes.
-	SIGSTOP: Stop signal, associated with number 19.
-		It pauses a process, and it cannot be caught or ignored.
-	SIGCONT: Continue signal, associated with number 18.
-		It resumes a process that was previously stopped.
-	SIGSEGV: Segmentation fault signal, associated with number 11.
-		It is generated when a process tries to access an invalid memory location, often indicating a bug in the program.
+### common signals
+Here’s a list of common signals in UNIX-like systems, along with their associated numbers.
+In the context of the minitalk project, the only signal allowed are SIGUSR1 and SIGUSR2
+SIGINT: Interrupt signal, associated with number 2.
+	It interrupts a running process. It is typically sent when a user presses Ctrl+C in the terminal.
+SIGKILL: Force termination signal, associated with number 9.
+	It immediately kills the process and cannot be caught or ignored.
+SIGTERM: Termination signal, associated with number 15.
+	It is a polite request for the process to terminate, which can be handled or ignored by the process.
+	SIGTERM is often expected to allow for a more orderly shutdown than SIGINT.
+SIGQUIT: Quit signal, associated with number 3.
+	Similar to SIGINT, but it also causes the process to create a core dump.
+SIGHUP: Hang-up signal, associated with number 1.
+	Often sent to a process when its controlling terminal is closed, typically used to indicate that a process should reload its configuration.
+SIGUSR1: User-defined signal 1, associated with number 10.
+	It can be used by processes for custom actions.
+SIGUSR2: User-defined signal 2, associated with number 12.
+	Like SIGUSR1, it is for custom purposes.
+SIGSTOP: Stop signal, associated with number 19.
+	It pauses a process, and it cannot be caught or ignored.
+SIGCONT: Continue signal, associated with number 18.
+	It resumes a process that was previously stopped.
+SIGSEGV: Segmentation fault signal, associated with number 11.
+	It is generated when a process tries to access an invalid memory location, often indicating a bug in the program.
 
 SIGUSR1 and SIGUSR2
 	SIGUSR1 and SIGUSR2 are user-defined signals in Unix-like systems that can be used for custom actions within a program.
