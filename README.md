@@ -1,5 +1,5 @@
 PROJECT MINITALK FOR 42
-- By chdonnat (Christophe Donnat from 42 Perpignan, France)
+By chdonnat (Christophe Donnat from 42 Perpignan, France)
 
 AIM OF THE PROJECT:
 You are required to create a communication program in the form of a client and a server.
@@ -37,19 +37,19 @@ SOME COMMANDS YOU CAN USE:
 make
 	compiles both server and client without bonus
 make server_only
-   compiles only the server
+	compiles only the server
 make client
-  compiles only the client
+	compiles only the client
 make bonus
 	compiles both server and cleint with bonus
 ./server
 	launches the server, which remains waiting until CTRL + C to stop it
 	the server must be launched before the client
 	when the client sends a message to the server, the server writes the message sent
-	and sends a confirmation to the client
+	(and sends a confirmation to the client for the bonus part)
 ./client <server PID> "<Your message>"
 	the client sends <Your message> to the server which has the <server PID> PID
-	and then wait for a response from the server
+	(and then wait for a response from the server for the bonus part)
 kill -SIGUSR1 <server PID>
 	sends a unique signal to the server so that you can see what is happening
 	when the server cannot receive a complete message
