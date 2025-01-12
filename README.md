@@ -63,7 +63,7 @@ launch the client
 	the client sends <Your message> to the server which has the <server PID> PID
 	(and then wait for a response from the server for the bonus part)
 
-	./client <server PID> "<Your message>"
+	./client <server PID> <"Your message">
 
 send a unique signal to the server so that you can see what is happening
 	when the server cannot receive a complete message
@@ -73,7 +73,8 @@ send a unique signal to the server so that you can see what is happening
 
 DOCUMENTATION:
 
-process
+**process**
+
 	A process is a running instance of a program that is executed by the operating system.
 	It includes the program's code, its current activity (such as variables and data), and system resources like memory and CPU time.
 	Each process is identified by a unique Process ID (PID).
