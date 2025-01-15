@@ -1,8 +1,6 @@
 # PROJECT MINITALK FOR 42
 By chdonnat (Christophe Donnat from 42 Perpignan, France)
 
-![minitalk](https://external-preview.redd.it/building-the-42-school-minitalk-project-a-guide-to-unix-v0-jFDTVY1Tc_NQoVLR-tKlhOjR2oEdtY50AmZ_5R88b5U.jpg?width=640&crop=smart&auto=webp&s=fb1dda6091ba34a7e7478184041f0d7836de5ee0)
-
 ## AIM OF THE PROJECT:
 You are required to create a communication program in the form of a client and a server. 
 The server must be launched first and, after starting, should display its PID. 
