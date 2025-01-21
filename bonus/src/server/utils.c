@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
+/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 14:52:22 by nifromon          #+#    #+#             */
-/*   Updated: 2025/01/10 00:38:30 by christophed      ###   ########.fr       */
+/*   Updated: 2025/01/21 11:05:08 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	close_program(int signum)
 	{
 		if (g_container->len_str)
 			free(g_container->len_str);
+		if (g_container->msg)
+			free(g_container->msg);
 		free(g_container);
 	}
 	exit (0);
@@ -37,10 +39,14 @@ void	error(char *str)
 		{
 			if (g_container->len_str)
 				free(g_container->len_str);
+			if (g_container->msg)
+				free(g_container->msg);
 			free(g_container);
 		}
 		exit(0);
 	}
+	if (g_container->msg)
+		free(g_container->msg);
 	initialize_container();
 	initialize_len();
 }
@@ -74,6 +80,6 @@ void	confirm_bit_reception(void)
 // Function to confirm the reception of the entire message
 void	confirm_message_reception(void)
 {
-	usleep(300);
+	usleep(200);
 	kill(g_container->pid, SIGUSR1);
 }

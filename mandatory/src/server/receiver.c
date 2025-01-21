@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   receiver.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
+/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 14:37:47 by nifromon          #+#    #+#             */
-/*   Updated: 2025/01/12 09:47:50 by christophed      ###   ########.fr       */
+/*   Updated: 2025/01/21 11:06:16 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,8 @@ void	end_reception(void)
 {
 	ft_printf("Message received from client %d:\n", g_container->pid);
 	ft_printf("\033[0;32m%s\033[0m\n", g_container->msg);
+	if (g_container->msg)
+		free(g_container->msg);
 	initialize_container();
 	initialize_len();
 }

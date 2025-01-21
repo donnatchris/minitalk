@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
+/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 14:37:15 by nifromon          #+#    #+#             */
-/*   Updated: 2025/01/12 09:56:21 by christophed      ###   ########.fr       */
+/*   Updated: 2025/01/21 11:04:10 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,11 @@ int	main(void)
 		{
 			usleep(100);
 			g_container->time++;
-			if (g_container->time >= 20000)
+			if (g_container->time >= 40000)
 				error("timeout");
 		}
 	}
+	if (g_container->msg)
+		free(g_container->msg);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initializer.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
+/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 14:56:41 by nifromon          #+#    #+#             */
-/*   Updated: 2025/01/12 10:31:52 by christophed      ###   ########.fr       */
+/*   Updated: 2025/01/21 11:13:20 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,7 @@
 // Function to initialize the g_container variables
 void	initialize_container(void)
 {
-	if (g_container->msg)
-	{
-		free(g_container->msg);
-		g_container->msg = NULL;
-	}
+	g_container->msg = NULL;
 	g_container->pid = -100;
 	g_container->len = 0;
 	g_container->chrono_on = 0;
@@ -37,7 +33,7 @@ void	initialize_len(void)
 	struct sigaction	act;
 
 	sigemptyset(&act.sa_mask);
-	act.sa_flags = SA_SIGINFO;
+	act.sa_flags = SA_SIGINFO | SA_RESTART;
 	act.sa_sigaction = check_msg_len;
 	ft_printf("Receiver initialized. Waiting for message lenght...\n");
 	if (sigaction(SIGUSR1, &act, NULL) == -1)
@@ -53,7 +49,7 @@ void	initialize_msg(void)
 	struct sigaction	act;
 
 	sigemptyset(&act.sa_mask);
-	act.sa_flags = SA_SIGINFO;
+	act.sa_flags = SA_SIGINFO | SA_RESTART;
 	act.sa_sigaction = receive_msg;
 	g_container->msg = (char *) malloc(sizeof(char) * (g_container->len + 1));
 	if (!g_container->msg)

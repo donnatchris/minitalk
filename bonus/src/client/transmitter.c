@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   transmitter.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
+/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 14:36:21 by nifromon          #+#    #+#             */
-/*   Updated: 2025/01/12 10:32:20 by christophed      ###   ########.fr       */
+/*   Updated: 2025/01/21 10:44:59 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	send_char(int server_pid, char c)
 		timer = 0;
 		while (!g_client->confirmed)
 		{
-			usleep(100);
+			usleep(50);
 			timer++;
 			if (timer >= 1000)
 				error("Server did not confirm. Communication have failed.");
