@@ -6,7 +6,7 @@
 /*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 14:52:22 by nifromon          #+#    #+#             */
-/*   Updated: 2025/01/21 11:05:08 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/01/21 11:46:49 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 void	close_program(int signum)
 {
 	(void) signum;
-	initialize_container();
 	if (g_container)
 	{
 		if (g_container->len_str)
@@ -34,7 +33,6 @@ void	error(char *str)
 	ft_printf("\x1b[31mERROR:\x1b[0m %s\n", str);
 	if (!ft_strncmp(str, "memory allocation failed", ft_strlen(str)))
 	{
-		initialize_container();
 		if (g_container)
 		{
 			if (g_container->len_str)

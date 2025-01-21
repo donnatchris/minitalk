@@ -6,7 +6,7 @@
 /*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 14:35:16 by nifromon          #+#    #+#             */
-/*   Updated: 2025/01/21 11:13:42 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/01/21 11:52:02 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,7 @@ void	initialize_confirmation(void)
 	struct sigaction	act;
 
 	sigemptyset(&act.sa_mask);
-	// sigaddset(&act.sa_mask, SIGUSR1);
-	// sigaddset(&act.sa_mask, SIGUSR2);
-	act.sa_flags = SA_SIGINFO  | SA_RESTART;
+	act.sa_flags = SA_SIGINFO | SA_RESTART;
 	act.sa_sigaction = confirm;
 	if (sigaction(SIGUSR1, &act, NULL) == -1)
 		error("sigaction error");
