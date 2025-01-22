@@ -19,6 +19,19 @@ The list of possible bonus features includes:
 - The server confirms the reception of each message by sending a signal to the client.
 - Support for Unicode characters.
 
+## ABOUT MY CODE
+The mandatory and bonus directories contain the same functionality. Here's how the program works:
+- Characters are sent bit by bit: SIGUSR1 corresponds to 0, and SIGUSR2 corresponds to 1.
+- When 8 bits are received, the server store the character.
+- Every time the server receives a bit, it confirms reception to the client by sending a SIGUSR2.
+- The client first sends 11 characters, which represent the length (strlen) of the message it will transmit. For example, if the strlen is 126, the client will send the string "00000000126".
+- The server verifies that the received string can be converted to an integer, then allocates memory for the message to be received.
+- The client sends the actual message.
+- The server ensures that the last character of the message is a newline ('\n'). It then sends a SIGUSR2 to the client to confirm complete reception of the message.
+- If the server encounters an error at any point, it returns "ERROR" and reinitializes itself to be ready to receive a new message.
+- A kind of "timer" is implemented: if too much time passes between the reception of two bits (or between two confirmations for the client), the programs return "ERROR", and the server reinitializes itself.
+- If another client attempts to send a message while the server is already processing a message from a different client, the new message is ignored. No response is sent to the second client, causing it to return "ERROR".
+
 ## ARCHITECTURE:
 - mandatory/ directory for the mandatory part:
     - include/ directory for header files
