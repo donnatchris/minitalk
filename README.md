@@ -24,7 +24,7 @@ The mandatory and bonus directories contain the same functionality. Here's how t
 - Characters are sent bit by bit: SIGUSR1 corresponds to 0, and SIGUSR2 corresponds to 1.
 - When 8 bits are received, the server store the character.
 - Every time the server receives a bit, it confirms reception to the client by sending a SIGUSR2.
-- The client first sends 11 characters, which represent the length (strlen) of the message it will transmit. For example, if the strlen is 126, the client will send the string "00000000126".
+- The client first sends 10 characters, which represent the length (strlen) of the message it will transmit. For example, if the strlen is 126, the client will send the string "0000000126".
 - The server verifies that the received string can be converted to an integer, then allocates memory for the message to be received.
 - The client sends the actual message.
 - The server ensures that the last character of the message is a newline ('\n'). It then sends a SIGUSR2 to the client to confirm complete reception of the message.
