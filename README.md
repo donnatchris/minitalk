@@ -81,7 +81,7 @@ the client sends <Your message> to the server which has the <server PID> PID
 
 	./client <server PID> <"Your message">
 
-send a unique signal to the server so that you can see what is happenin when the server cannot receive a complete message:
+send a unique signal to the server so that you can see what is happening when the server cannot receive a complete message:
 
 	 kill -SIGUSR1 <server PID>
 
